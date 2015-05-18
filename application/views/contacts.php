@@ -1,4 +1,3 @@
-
 <div class="content"><div class="ic"></div>
     <div class="container_12">
         <div class="grid_12">
@@ -14,30 +13,28 @@
             </div>              
         </div>
         <div class="grid_6 prefix_1">
-            <form id="form">
-                <div class="success_wrapper">
-                    <div class="success">Contact form submitted!<br>
-                        <strong>We will be in touch soon.</strong> </div></div>
+            <form id="form" action="Respond">               
                 <fieldset>
                     <label class="name">
-                        <input type="text" value="Name:">
-                        <br class="clear">
+                        <input type="text" name="name" placeholder="Name:" class="field">
+                        <br class="error">
                         <span class="error error-empty">*This is not a valid name.</span><span class="empty error-empty">*This field is required.</span> </label>
                     <label class="phone">
-                        <input type="tel" value="Telephone:">
+                        <input type="tel" placeholder="Telephone:" class="field">
                         <br class="clear">
                         <span class="error error-empty">*This is not a valid phone number.</span><span class="empty error-empty">*This field is required.</span> </label>
                     <label class="email">
-                        <input type="text" value="E-mail:">
+                        <input type="text" placeholder="E-mail:" class="field">
                         <br class="clear">
                         <span class="error error-empty">*This is not a valid email address.</span><span class="empty error-empty">*This field is required.</span> </label>
-
                     <label class="message">
                         <textarea>Message:</textarea>
                         <br class="clear">
                         <span class="error">*The message is too short.</span> <span class="empty">*This field is required.</span> </label>
                     <div class="clear"></div>
-                    <div class="btns"><a data-type="reset" class="btn">clear</a><a data-type="submit" class="btn">send</a>
+                    <div class="btns">
+                        <input type="reset" name="reset" value="Reset" class="btn-grey"><br><br>
+                        <input type="submit" name="submit" value="Submit" class="btn-red">
                         <div class="clear"></div>
                     </div></fieldset></form>
             Marketing Department: <br>

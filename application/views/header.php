@@ -16,6 +16,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="public/js/jquery.equalheights.js"></script>
         <script src="public/js/jquery.easing.1.3.js"></script>
         <script src="public/js/camera.js"></script>
+        <script src="public/js/forms.js"></script>
+
         <!--[if (gt IE 9)|!(IE)]><!-->
         <script src="public/js/jquery.mobile.customized.min.js"></script>
         <!--<![endif]-->

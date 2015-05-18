@@ -95,36 +95,7 @@
 							,defVal=label.data('defVal')								
 						return label.length?val==defVal?'nope':val:'nope'
 					}
-					,submitFu:function(){
-						_.validateFu(_.labels)							
-						if(!_.form.has('.'+_.invalidCl).length)
-							$.ajax({
-								type: "POST",
-								url:_.mailHandlerURL,
-								data:{
-									name:_.getValFromLabel($('.name',_.form)),
-									email:_.getValFromLabel($('.email',_.form)),
-									phone:_.getValFromLabel($('.phone',_.form)),
-									fax:_.getValFromLabel($('.fax',_.form)),
-									state:_.getValFromLabel($('.state',_.form)),
-									message:_.getValFromLabel($('.message',_.form)),
-									owner_email:_.ownerEmail,
-									stripHTML:_.stripHTML
-								},
-								success: function(){
-									_.showFu()
-								}
-							})			
-					},
-					showFu:function(){
-						_.success.slideDown(function(){
-							setTimeout(function(){
-								_.success.slideUp()
-								_.form.trigger('reset')
-							},_.successShow)
-						})
-					},
-					controlsFu:function(){
+					,controlsFu:function(){
 						$(_.controls,_.form).each(function(){
 							var th=$(this)
 							th
