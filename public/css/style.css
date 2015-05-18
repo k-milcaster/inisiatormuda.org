@@ -31,7 +31,7 @@ text-decoration:none;
 body {
 	font: 14px/20px  Arial, Helvetica, sans-serif;
 	color:#a1a1a1;
-	background-color: #009fb3;
+	background-color: #FF3737;
 	position:relative;
 	min-width:960px;
 
@@ -54,7 +54,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
 	font-family: 'Open Sans', sans-serif ;
-	color: #009fb3;
+	color: #FF3737;
 	text-transform: uppercase;
 
 }
@@ -148,7 +148,7 @@ ul.list .count{
 	line-height: 48px;
 	color: #fff;
 	font-size: 30px;
-	background-color: #fd9220;
+	background-color: #E50000;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -195,19 +195,19 @@ a {
 }
 
 a:hover {
-	color: #009fb3;
+	color: #FF3737;
 	
 }
 
 a.btn {
-	color: #fd9220;
+	color: #E50000;
 	font: bold 14px/20px 'Open Sans Condensed', sans-serif;
 	display: inline-block;
 	margin-top: 33px;
 }
 
 a.btn:hover {
-	color: #009fb3;
+	color: #FF3737;
 }
 
 /*preclass*/
@@ -315,11 +315,11 @@ h1 a img {
 /*Content*/
 
 .col1 {
-	color: #fd9220;
+	color: #E50000;
 }
 
 .col2  {
-	color: #5fabb5;
+	color: #C30000;
 }
 
 .col3 {
@@ -513,8 +513,11 @@ footer {
 	color: #d7d7d7;
 }
 
+footer a {
+        color: #A4A4A4;
+}
 footer a:hover {
-	color: #fd9220;
+	color: #E50000;
 }
 
 
