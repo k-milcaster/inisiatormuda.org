@@ -20,7 +20,10 @@ class About extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->load->view('header');
+        $header = array(
+            'title' => 'About',
+        );
+        $this->load->view('header', $header);
         $this->load->view('about');
         $this->load->view('footer');
     }

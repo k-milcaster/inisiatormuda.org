@@ -20,7 +20,10 @@ class Portofolio extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->load->view('header');
+        $header = array(
+            'title' => 'Portofolio',
+        );
+        $this->load->view('header', $header);
         $this->load->view('portofolio');
         $this->load->view('footer');
     }

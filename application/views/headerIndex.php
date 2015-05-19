@@ -3,20 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <html lang="en">
     <head>
-        <title>Home</title>
+        <title>Home | Inisiatormuda.org</title>
         <meta charset="utf-8">
-        <link rel="icon" href="public/images/favicon.ico">
-        <link rel="shortcut icon" href="public/images/favicon.ico" />
-        <link rel="stylesheet" href="public/css/style.css">
-        <link rel="stylesheet" href="public/css/camera.css">
-        <script src="public/js/jquery.js"></script>
-        <script src="public/js/jquery-migrate-1.1.1.js"></script>
-        <script src="public/js/superfish.js"></script>
-        <script src="public/js/jquery.equalheights.js"></script>
-        <script src="public/js/jquery.easing.1.3.js"></script>
-        <script src="public/js/camera.js"></script>
+        <link rel="icon" href="<?php echo base_url(); ?>public/images/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url(); ?>public/images/favicon.ico" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/style.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/camera.css">
+        <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery-migrate-1.1.1.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/superfish.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.equalheights.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.easing.1.3.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/camera.js"></script>
         <!--[if (gt IE 9)|!(IE)]><!-->
-        <script src="public/js/jquery.mobile.customized.min.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.mobile.customized.min.js"></script>
         <!--<![endif]-->
         <script>
             $(document).ready(function () {
@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <header> 
             <div class="container_12">
                 <div class="grid_12"> 
-                    <h1><a href="index.html"><img src="public/images/logo.png" alt="public/Boo House"></a> </h1>
+                    <h1><a href="<?php echo base_url(); ?>"><img src="public/images/logo.png" alt="public/Boo House"></a> </h1>
                     <div class="menu_block">
 
                         <nav  class="" >

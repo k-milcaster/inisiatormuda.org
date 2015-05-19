@@ -20,7 +20,10 @@ class Contacts extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->load->view('header');
+        $header = array(
+            'title' => 'Contacts',
+        );
+        $this->load->view('header', $header);
         $this->load->view('contacts');
         $this->load->view('footer');
     }
