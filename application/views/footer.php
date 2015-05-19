@@ -8,11 +8,10 @@
                 <a href="#"></a>
             </div>
             <div class="copy">
-                WebDesign (C) 2013 | <a href="#">Privacy Policy</a> | Website Template  designed by <a href="http://www.templatemonster.com/" rel="nofollow">TemplateMonster.com</a><br>Look for more free web templates <a href="http://www.websitetemplatesonline.com" target="_blank">at WTO.com</a>.
+                InisiatorMuda (C) 2015 | <a href="#">Privacy Policy</a> | Website developed by <a href="http://www.templatemonster.com/" rel="nofollow">K-Software Development</a><br>
             </div>
         </div>
     </div>
 </footer>
-
 </body>
 </html>

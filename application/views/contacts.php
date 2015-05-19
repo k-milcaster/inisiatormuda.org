@@ -13,7 +13,7 @@
             </div>              
         </div>
         <div class="grid_6 prefix_1">
-            <form id="form" action="Respond">               
+            <form id="form" action="<?php echo $title ?>Respond">               
                 <fieldset>
                     <label class="name">
                         <input type="text" name="name" placeholder="Name:" class="field">
@@ -40,7 +40,6 @@
             Marketing Department: <br>
             E-mail: <span class="col1"><a href="#">marketing@templatemonster.com</a></span> <br>
             Phone: 1-518-312-4162
-
         </div>
     </div>
 </div>
