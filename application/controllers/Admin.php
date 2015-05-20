@@ -23,7 +23,11 @@ class Admin extends CI_Controller {
         $header = array(
             'title' => 'Login',
         );
-        $this->load->view('header',$header);
+
+        if (isset($_POST['login'])) {
+            $this->validasi_login();
+        }
+        $this->load->view('header', $header);
         $this->load->view('admin');
         $this->load->view('footer');
     }
@@ -32,19 +36,23 @@ class Admin extends CI_Controller {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         if ($username == '' || $password == '') {
-            redirect(base_url() . "akun?s=login&errorl=blank");
+            redirect(base_url() . "Admin");
         }
-        $this->load->model('Membership_model');
+        if($username == '' || $password == ''){
+            redirect(base_url()."Admin");
+        }
+        $this->load->model('loginAkun');
         $login = false;
-        $login = $this->Membership_model->validate($username, $password);
+        $login = $this->loginAkun->getTrue($username, $password);
         if ($login == false) {
-            redirect(base_url() . "akun?s=login&errorl=invalid");
+            redirect(base_url() . "Admin");
         } else {
-            $id = $this->Membership_model->getidakun($username);
-            $data = array('LOGIN' => TRUE, 'USERNAME' => $username, 'ID_AKUN' => $id);
-            $this->session->set_userdata($data);
-            redirect(base_url() . "dashboard");
+            $this->session->set_flashdata('username', $username); 
+            redirect(base_url() . "Home");
+        
+            
         }
+        
     }
 
 }

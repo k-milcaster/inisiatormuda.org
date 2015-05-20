@@ -3,21 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/about.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Contacts.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/config/autoload.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/footer.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Home.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/config/database.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Clients.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/headerIndex.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/contacts.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Portofolio.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/About.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/config/routes.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/header.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/config/config.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/portofolio.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/loginAkun.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Admin.php</file>
         </group>
     </open-files>
 </project-private>

@@ -18,5 +18,18 @@ class loginAkun extends CI_Model {
             return FALSE;
         }
     }
-
-}
+//
+//    public function getUsername($username, $password) {
+//        $query = $this->db->query("SELECT usernameAkun, passwordAkun "
+//                . "FROM akun WHERE usernameAkun= '" . $username . "' AND passwordAkun= '" . $password . "'");
+//
+//
+//        if ($query->num_rows() > 0) {
+//                return TRUE;
+//        } else {
+//            return FALSE;
+//        }
+//    }
+//
+    
+        }

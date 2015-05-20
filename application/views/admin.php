@@ -3,19 +3,19 @@
         <div class="grid_12">
             <h3><span>Log In</span></h3></div>
         <div class="grid_6 prefix_1">
-            <form id="form" action="<?php echo $title ?>Respond">               
+            <form id="form" method="post">               
                 <fieldset>
                     <label class="name">
-                        <input type="text" name="name" placeholder="Name:" class="field">
+                        <input type="text" name="username" placeholder="Userame:" class="field">
                         <br class="error">
                         <span class="empty error-empty">*This field is required.</span> </label>
                     <label class="password">
-                        <input type="password" placeholder="Password:" class="field">
+                        <input type="password" name="password" placeholder="Password:" class="field">
                         <br class="clear">
                         <span class="empty error-empty">*This field is required.</span> </label>
                     <div class="clear"></div>
                     <div class="btns">
-                        <input type="submit" name="submit" value="Log In" class="btn-red-gundek">
+                        <input type="submit" name="login" value="logIn" class="btn-red-gundek">
                         <div class="clear"></div>
                     </div></fieldset></form>
             Marketing Department: <br>
