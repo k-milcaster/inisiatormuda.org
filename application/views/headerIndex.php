@@ -60,11 +60,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <nav  class="" >
                             <ul class="sf-menu">
-                                <li class="current"><a href="home">Home</a></li>
-                                <li><a href="about">about</a></li>
-                                <li><a href="portofolio">Portfolio</a></li>
-                                <li><a href="clients">Clients</a></li>
-                                <li><a href="contacts">Contacts</a></li>
+                                <li <?php if ($title == "Home") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Home</a></li>
+                                <li <?php if ($title == "About") echo 'class="current"'; ?>>
+                                    <a href="#">Goresan Pena</a>
+                                    <ul>
+                                        <li><a href="#">Submenu 1</a></li>
+                                        <li><a href="#">Submenu 2</a></li>
+                                        <li><a href="#">Submenu 3</a></li>
+                                    </ul>
+                                </li>
+                                <li <?php if ($title == "Portofolio") echo 'class="current"'; ?>>
+                                    <a href="#">Tentang Inisiator</a>
+                                    <ul>
+                                        <li><a href="#">Submenu 1</a></li>
+                                        <li><a href="#">Submenu 2</a></li>
+                                    </ul>
+                                </li>
+                                <li <?php if ($title == "Clients") echo 'class="current"'; ?>><a href="#">Liputan Media</a></li>
+                                <li <?php if ($title == "Contacts") echo 'class="current"'; ?>><a href="#">Contacts</a></li>
                             </ul>
                         </nav>
 
