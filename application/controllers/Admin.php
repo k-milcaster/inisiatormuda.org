@@ -20,29 +20,31 @@ class Admin extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $this->load->view('header');
+        $header = array(
+            'title' => 'Login',
+        );
+        $this->load->view('header',$header);
         $this->load->view('admin');
         $this->load->view('footer');
     }
 
-    
-    private function validasi_login(){
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-		if ($username=='' || $password=='') {
-			redirect(base_url()."akun?s=login&errorl=blank");	
-		}
-		$this->load->model('Membership_model');
-		$login = false;
-		$login = $this->Membership_model->validate($username, $password);
-		if($login==false){
-			redirect(base_url()."akun?s=login&errorl=invalid");	
-		} else {
-			$id = $this->Membership_model->getidakun($username);
-			$data=array('LOGIN'=>TRUE,'USERNAME'=>$username,'ID_AKUN'=>$id);
-			$this->session->set_userdata($data);
-			redirect(base_url()."dashboard");
-		}
-	}
-    
+    private function validasi_login() {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        if ($username == '' || $password == '') {
+            redirect(base_url() . "akun?s=login&errorl=blank");
+        }
+        $this->load->model('Membership_model');
+        $login = false;
+        $login = $this->Membership_model->validate($username, $password);
+        if ($login == false) {
+            redirect(base_url() . "akun?s=login&errorl=invalid");
+        } else {
+            $id = $this->Membership_model->getidakun($username);
+            $data = array('LOGIN' => TRUE, 'USERNAME' => $username, 'ID_AKUN' => $id);
+            $this->session->set_userdata($data);
+            redirect(base_url() . "dashboard");
+        }
+    }
+
 }

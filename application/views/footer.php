@@ -8,7 +8,7 @@
                 <a href="#"></a>
             </div>
             <div class="copy">
-                InisiatorMuda (C) 2015 | <a href="#">Privacy Policy</a> | Website developed by <a href="http://www.templatemonster.com/" rel="nofollow">K-Software Development</a><br>
+                InisiatorMuda (C) 2015 | <a href="#">Privacy Policy</a> | Website developed by <a href="#" rel="nofollow">K-Software Development</a><br>
             </div>
         </div>
     </div>
