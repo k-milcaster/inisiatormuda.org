@@ -41,9 +41,9 @@ class Admin extends CI_Controller {
         if($username == '' || $password == ''){
             redirect(base_url()."Admin");
         }
-        $this->load->model('loginAkun');
+        $this->load->model('loginakun');
         $login = false;
-        $login = $this->loginAkun->getTrue($username, $password);
+        $login = $this->loginakun->getTrue($username, $password);
         if ($login == false) {
             redirect(base_url() . "Admin");
         } else {

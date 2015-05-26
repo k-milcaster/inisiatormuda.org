@@ -1,6 +1,6 @@
 <?php
 
-class LoginAkun extends CI_Model {
+class Loginakun extends CI_Model {
 
     public function __construct() {
         // Call the CI_Model constructor

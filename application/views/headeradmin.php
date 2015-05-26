@@ -49,24 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <nav  class="" >
                             <ul class="sf-menu">
-                                <li <?php if ($title == "Home") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Home</a></li>
-                                <li <?php if ($title == "About") echo 'class="current"'; ?>>
-                                    <a href="#">Goresan Pena</a>
-                                    <ul>
-                                        <li><a href="#">Submenu 1</a></li>
-                                        <li><a href="#">Submenu 2</a></li>
-                                        <li><a href="#">Submenu 3</a></li>
-                                    </ul>
-                                </li>
-                                <li <?php if ($title == "Portofolio") echo 'class="current"'; ?>>
-                                    <a href="#">Tentang Inisiator</a>
-                                    <ul>
-                                        <li><a href="#">Submenu 1</a></li>
-                                        <li><a href="#">Submenu 2</a></li>
-                                    </ul>
-                                </li>
-                                <li <?php if ($title == "Clients") echo 'class="current"'; ?>><a href="#">Liputan Media</a></li>
-                                <li <?php if ($title == "Contacts") echo 'class="current"'; ?>><a href="#">Contacts</a></li>
+                               
+                                <li <?php if ($title == "Tulis_Artikel") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Tulis Artikel</a></li>
+                                <li <?php if ($title == "Tambah_Admin") echo 'class="current"'; ?>><a href="#">Tambah Admin</a></li>
+                                <li <?php if ($title == "Last_Login") echo 'class="current"'; ?>><a href="#">Last Login</a></li>
+                                <li <?php if ($title == "Last_Login") echo 'class="current"'; ?>><a href="#">Log Out</a></li>
+                                
+                                
                             </ul>
                         </nav>
 
