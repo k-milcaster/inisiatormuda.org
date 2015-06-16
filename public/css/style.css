@@ -85,6 +85,7 @@ h3.head2 {
 }
 
 
+
 h3.head3 {
     padding-bottom: 30px;
     margin-top: -30px;
@@ -106,6 +107,10 @@ h3 span {
     background-color: #fff;
     display: inline-block;
 }
+h3 span:hover {
+    text-decoration: underline;
+}
+
 h2>span {
     padding-top: 18px;
     color: #abaaaa;

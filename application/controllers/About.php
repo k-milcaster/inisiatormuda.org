@@ -28,4 +28,22 @@ class About extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function director() {
+        $header = array(
+            'title' => 'About',
+        );
+        $this->load->view('header', $header);
+        $this->load->view('director');
+        $this->load->view('footer');
+    }
+
+    public function initiator() {
+        $header = array(
+            'title' => 'About',
+        );
+        $this->load->view('header', $header);
+        $this->load->view('initiator');
+        $this->load->view('footer');
+    }
+
 }

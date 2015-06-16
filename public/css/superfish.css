@@ -64,11 +64,10 @@ nav{ position:relative;padding: 0px 0 0 0;}
 
 
 
-.sf-menu li ul li a{
-    text-transform: uppercase;
+.sf-menu li ul li a{    
     font-size: 16px;
     font-family: 'Open Sans Condensed', sans-serif;
-    padding-bottom: 100px;
+    padding-bottom: 100px;   
     line-height: 1.95em;
     position: relative;
     color: #fff;

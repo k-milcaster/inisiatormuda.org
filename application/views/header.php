@@ -10,6 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/camera.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/form.css">
+        <link href="<?php echo base_url(); ?>public/css/hover.css" rel="stylesheet" media="all">
+        <link href="<?php echo base_url(); ?>public/css/hover-min.css" rel="stylesheet" media="all">
         <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery-migrate-1.1.1.js"></script>
         <script src="<?php echo base_url(); ?>public/js/superfish.js"></script>
@@ -22,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>public/js/jquery.mobile.customized.min.js"></script>
         <!--<![endif]-->
         <script>
-            $(function() {
+            $(function () {
                 // Initialize the gallery
                 $('.port a.gal').touchTouch();
             });
@@ -44,29 +46,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <header> 
             <div class="container_12">
                 <div class="grid_12"> 
-                    <h1><a href="<?php echo base_url(); ?>"><img src="public/images/logo.png" alt="public/Boo House"></a> </h1>
+                    <h1><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>public/images/logo.png" alt="public/Boo House"></a> </h1>
                     <div class="menu_block">
 
                         <nav  class="" >
                             <ul class="sf-menu">
                                 <li <?php if ($title == "Home") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Home</a></li>
                                 <li <?php if ($title == "About") echo 'class="current"'; ?>>
-                                    <a href="#">Goresan Pena</a>
+                                    <a href="<?php echo base_url() ?>about">About Us</a>
                                     <ul>
-                                        <li><a href="#">Submenu 1</a></li>
-                                        <li><a href="#">Submenu 2</a></li>
-                                        <li><a href="#">Submenu 3</a></li>
+                                        <li><a href="#">Greetings from Executive Director</a></li>
+                                        <li><a href="#">Board of Advisors</a></li>
+                                        <li><a href="#">Board of Directors</a></li>
+                                        <li><a href="<?php echo base_url(); ?>about/initiator">Initiators</a></li>
                                     </ul>
                                 </li>
-                                <li <?php if ($title == "Portofolio") echo 'class="current"'; ?>>
-                                    <a href="#">Tentang Inisiator</a>
-                                    <ul>
-                                        <li><a href="#">Submenu 1</a></li>
-                                        <li><a href="#">Submenu 2</a></li>
-                                    </ul>
-                                </li>
-                                <li <?php if ($title == "Clients") echo 'class="current"'; ?>><a href="#">Liputan Media</a></li>
+                                <li <?php if ($title == "Programs") echo 'class="current"'; ?>><a href="#">Program</a></li>
+                                <li <?php if ($title == "Partners") echo 'class="current"'; ?>><a href="#">Partners</a></li>
                                 <li <?php if ($title == "Contacts") echo 'class="current"'; ?>><a href="#">Contacts</a></li>
+                                <li <?php if ($title == "Career") echo 'class="current"'; ?>><a href="#">Career</a></li>
+                                <li <?php if ($title == "Blog") echo 'class="current"'; ?>><a href="#">Blog</a></li>
                             </ul>
                         </nav>
 
