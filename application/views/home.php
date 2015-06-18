@@ -27,18 +27,18 @@
         </div>
         <div class="grid_4">
             <div class="icon">
-                <img src="<?php echo base_url(); ?>public/images/act/Edukasi.jpg" alt="">
+                <img src="<?php echo base_url(); ?>public/images/act/Edukasi.jpg" alt="" >
                 <div class="title">EDUKASI</div>
             </div>
         </div>
         <div class="grid_4">
             <div class="icon">
-                <img src="<?php echo base_url(); ?>public/images/act/Legal.jpg" alt="">
+                <img src="<?php echo base_url(); ?>public/images/act/Legal.jpg" alt="" >
                 <div class="title">LEGAL</div></div>
         </div>
         <div class="grid_4">
             <div class="icon">
-                <img src="<?php echo base_url(); ?>public/images/act/Riset.jpg" alt="">
+                <img src="<?php echo base_url(); ?>public/images/act/Riset.jpg" alt="" >
                 <div class="title">RISET</div>
             </div>
         </div>
@@ -60,19 +60,19 @@
             <h3><span>Board Of Advisor</span></h3></div>
         <div class="grid_6">
             <blockquote>
-                <img src="<?php echo base_url(); ?>public/images/advisor/RanggaWidigda.jpg" alt="" class="img_inner fleft">
+                <img src="<?php echo base_url(); ?>public/images/advisor/RanggaWidigda.jpg" alt="" class="img_inner fleft hvr-bob" style="width: 200px; height: 200px;">
                 <div class="extra_wrapper">
-                    <p>Kalimat sedikit aja</p>
-                    <span class="col2 upp">Bule 1  </span>
+                    <p></p>
+                    <span class="col2 upp">Rangga Widigda</span>
                 </div>
             </blockquote>
         </div>
         <div class="grid_6">
             <blockquote>
-                <img src="<?php echo base_url(); ?>public/images/advisor/DamianAgataYuvens.jpg" alt="" class="img_inner fleft">
+                <img src="<?php echo base_url(); ?>public/images/advisor/DamianAgataYuvens.jpg" alt="" class="img_inner fleft hvr-bob" style="width: 200px; height: 200px">
                 <div class="extra_wrapper">
-                    <p>Kalimat sedikit aja</p>
-                    <span class="col2 upp">Bule 2  </span>
+                    <p></p>
+                    <span class="col2 upp">Damian Agata Yuvens</span>
                     
                 </div>
             </blockquote>

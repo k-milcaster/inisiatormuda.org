@@ -27,8 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     loader: false,
                     pagination: false,
                     thumbnails: false,
-                    height: '32.92857142857143%',
-                    minHeight: '300',
+                    height: '600px',
+                    minHeight: '600',
                     caption: false,
                     navigation: true,
                     fx: 'mosaic'
