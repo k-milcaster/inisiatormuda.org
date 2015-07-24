@@ -4,6 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
+    function __construct() {
+        parent::__construct();
+        $this->load->library('session');
+    }
+
     /**
      * Index Page for this controller.
      *
@@ -20,39 +25,48 @@ class Admin extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $header = array(
-            'title' => 'Login',
-        );
 
-        if (isset($_POST['login'])) {
-            $this->validasi_login();
+        if ($this->session->userdata('id_user') !== null) {
+            $header = array(
+                'title' => 'Administration',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('footer');
+        } else {
+
+//            $header = array(
+//                'title' => 'Login',
+//            );
+//            if (isset($_POST['login'])) {
+//                $this->validasi_login();
+//            }            
+            $this->load->view('login');
+            $this->load->view('footer');
         }
-        $this->load->view('header', $header);
-        $this->load->view('admin');
-        $this->load->view('footer');
     }
 
-    private function validasi_login() {
+    public function doLogin() {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         if ($username == '' || $password == '') {
             redirect(base_url() . "Admin");
-        }
-        if($username == '' || $password == ''){
-            redirect(base_url()."Admin");
-        }
-        $this->load->model('loginakun');
-        $login = false;
-        $login = $this->loginakun->getTrue($username, $password);
-        if ($login == false) {
-            redirect(base_url() . "Admin");
         } else {
-            $this->session->set_flashdata('username', $username); 
-            redirect(base_url() . "Home");
-        
-            
+            $this->load->model('loginakun');
+            $login = false;
+            $login = $this->loginakun->getAccount($username, $password);
+            if ($login->num_rows() > 0) {
+                $row = $login->row_array();
+                $this->session->set_userdata($row);
+                redirect(base_url() . "Admin");
+            } else {
+                $this->load->view('login');
+            }
         }
-        
+    }
+
+    public function doLogOut() {
+        $this->session->sess_destroy();
+        redirect(base_url());
     }
 
 }

@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>public/js/jquery.mobile.customized.min.js"></script>
         <!--<![endif]-->
         <script>
-            $(function() {
+            $(function () {
                 // Initialize the gallery
                 $('.port a.gal').touchTouch();
             });
@@ -49,13 +49,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <nav  class="" >
                             <ul class="sf-menu">
-                               
-                                <li <?php if ($title == "Tulis_Artikel") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Tulis Artikel</a></li>
-                                <li <?php if ($title == "Tambah_Admin") echo 'class="current"'; ?>><a href="#">Tambah Admin</a></li>
-                                <li <?php if ($title == "Last_Login") echo 'class="current"'; ?>><a href="#">Last Login</a></li>
-                                <li <?php if ($title == "Last_Login") echo 'class="current"'; ?>><a href="#">Log Out</a></li>
-                                
-                                
+                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Articles</a></li>
+                                <li <?php if ($title == "users") echo 'class="current"'; ?>><a href="#">User</a></li>
+                                <li <?php if ($title == "logout") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/doLogout">Log Out</a></li>                                                                
                             </ul>
                         </nav>
 

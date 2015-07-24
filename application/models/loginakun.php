@@ -7,17 +7,12 @@ class Loginakun extends CI_Model {
         parent::__construct();
     }
 
-    public function getTrue($username, $password) {
-        $query = $this->db->query("SELECT usernameAkun, passwordAkun "
-                . "FROM akun WHERE usernameAkun= '" . $username . "' AND passwordAkun= '" . $password . "'");
-
-
-        if ($query->num_rows() > 0) {
-                return TRUE;
-        } else {
-            return FALSE;
-        }
+    public function getAccount($username, $password) {
+        $query = $this->db->query("SELECT * "
+                . "FROM user WHERE username= '" . $username . "' AND password= '" . $password . "'");
+        return $query;
     }
+
 //
 //    public function getUsername($username, $password) {
 //        $query = $this->db->query("SELECT usernameAkun, passwordAkun "
@@ -31,5 +26,4 @@ class Loginakun extends CI_Model {
 //        }
 //    }
 //
-    
-        }
+}
