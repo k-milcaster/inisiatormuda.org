@@ -8,14 +8,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="icon" href="<?php echo base_url(); ?>public/images/favicon.ico">
         <link rel="shortcut icon" href="<?php echo base_url(); ?>public/images/favicon.ico" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/style.css">
-        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/camera.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/form.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/component.css" />
         <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery-migrate-1.1.1.js"></script>
         <script src="<?php echo base_url(); ?>public/js/superfish.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery.equalheights.js"></script>
-        <script src="<?php echo base_url(); ?>public/js/jquery.easing.1.3.js"></script>
-        <script src="<?php echo base_url(); ?>public/js/camera.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.easing.1.3.js"></script>        
         <script src="<?php echo base_url(); ?>public/js/forms.js"></script>
 
         <!--[if (gt IE 9)|!(IE)]><!-->
@@ -44,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <header> 
             <div class="container_12">
                 <div class="grid_12"> 
-                    <h1><a href="<?php echo base_url(); ?>"><img src="public/images/logo.png" alt="public/Boo House"></a> </h1>
+                    <h1><a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>public/images/logo.png" alt="public/Boo House"></a> </h1>
                     <div class="menu_block">
 
                         <nav  class="" >

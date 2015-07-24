@@ -27,11 +27,7 @@ class Admin extends CI_Controller {
     public function index() {
 
         if ($this->session->userdata('id_user') !== null) {
-            $header = array(
-                'title' => 'Administration',
-            );
-            $this->load->view('headeradmin', $header);
-            $this->load->view('footer');
+            redirect(base_url() . "admin/users    ");
         } else {
 
 //            $header = array(
@@ -51,13 +47,12 @@ class Admin extends CI_Controller {
         if ($username == '' || $password == '') {
             redirect(base_url() . "Admin");
         } else {
-            $this->load->model('loginakun');
-            $login = false;
-            $login = $this->loginakun->getAccount($username, $password);
+            $this->load->model('usersModel');
+            $login = $this->usersModel->getAccount($username, $password);
             if ($login->num_rows() > 0) {
                 $row = $login->row_array();
                 $this->session->set_userdata($row);
-                redirect(base_url() . "Admin");
+                redirect(base_url() . "admin");
             } else {
                 $this->load->view('login');
             }
@@ -67,6 +62,23 @@ class Admin extends CI_Controller {
     public function doLogOut() {
         $this->session->sess_destroy();
         redirect(base_url());
+    }
+
+    public function users() {
+        $this->load->model('usersModel');
+
+        $users = $this->usersModel->getAccountList();
+
+        $header = array(
+            'title' => 'users',
+        );
+        
+        $content = array(
+          'users' => $users,  
+        );
+        $this->load->view('headeradmin', $header);
+        $this->load->view('admusers', $content);
+        $this->load->view('footer');
     }
 
 }
