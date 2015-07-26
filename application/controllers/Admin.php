@@ -47,8 +47,8 @@ class Admin extends CI_Controller {
         if ($username == '' || $password == '') {
             redirect(base_url() . "Admin");
         } else {
-            $this->load->model('usersModel');
-            $login = $this->usersModel->getAccount($username, $password);
+            $this->load->model('usersmodel');
+            $login = $this->usersmodel->getAccount($username, $password);
             if ($login->num_rows() > 0) {
                 $row = $login->row_array();
                 $this->session->set_userdata($row);
@@ -65,9 +65,9 @@ class Admin extends CI_Controller {
     }
 
     public function users() {
-        $this->load->model('usersModel');
+        $this->load->model('usersmodel');
 
-        $users = $this->usersModel->getAccountList();
+        $users = $this->usersmodel->getAccountList();
 
         $header = array(
             'title' => 'users',
@@ -109,8 +109,8 @@ class Admin extends CI_Controller {
     }
 
     public function system() {
-        $this->load->model('systemModel');
-        $whole = $this->systemModel->getStatus('wholeweb');
+        $this->load->model('systemmodel');
+        $whole = $this->systemmodel->getStatus('wholeweb');
         foreach ($whole->result() as $row) {
             $data = array(
                 'whole' => $row->status,
@@ -125,14 +125,14 @@ class Admin extends CI_Controller {
     }
 
     public function showWhole() {
-        $this->load->model('systemModel');
-        $this->systemModel('wholeweb', '0');
+        $this->load->model('systemmodel');
+        $this->systemmodel('wholeweb', '0');
         redirect(base_url() . 'admin/system');
     }
 
     public function hideWhole() {
-        $this->load->model('systemModel');
-        $this->systemModel->changeStatus('wholeweb', '1');
+        $this->load->model('systemmodel');
+        $this->systemmodel->changeStatus('wholeweb', '1');
         redirect(base_url() . 'admin/system');
     }
 

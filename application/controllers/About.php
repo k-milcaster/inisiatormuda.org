@@ -20,30 +20,54 @@ class About extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-        $header = array(
-            'title' => 'About',
-        );
-        $this->load->view('header', $header);
-        $this->load->view('about');
-        $this->load->view('footer');
+        $this->load->model('systemModel');
+        $status = $this->systemModel->getStatus('wholeweb');
+        foreach ($status->result() as $row) {
+            if ($row->status === '0') {
+                $header = array(
+                    'title' => 'About',
+                );
+                $this->load->view('header', $header);
+                $this->load->view('about');
+                $this->load->view('footer');
+            } else {
+                $this->load->view('maintenance');
+            }
+        }
     }
 
     public function director() {
-        $header = array(
-            'title' => 'About',
-        );
-        $this->load->view('header', $header);
-        $this->load->view('director');
-        $this->load->view('footer');
+        $this->load->model('systemModel');
+        $status = $this->systemModel->getStatus('wholeweb');
+        foreach ($status->result() as $row) {
+            if ($row->status === '0') {
+                $header = array(
+                    'title' => 'About',
+                );
+                $this->load->view('header', $header);
+                $this->load->view('director');
+                $this->load->view('footer');
+            } else {
+                $this->load->view('maintenance');
+            }
+        }
     }
 
     public function initiator() {
-        $header = array(
-            'title' => 'About',
-        );
-        $this->load->view('header', $header);
-        $this->load->view('initiator');
-        $this->load->view('footer');
+        $this->load->model('systemModel');
+        $status = $this->systemModel->getStatus('wholeweb');
+        foreach ($status->result() as $row) {
+            if ($row->status === '0') {
+                $header = array(
+                    'title' => 'About',
+                );
+                $this->load->view('header', $header);
+                $this->load->view('initiator');
+                $this->load->view('footer');
+            } else {
+                $this->load->view('maintenance');
+            }
+        }
     }
 
 }
