@@ -72,13 +72,68 @@ class Admin extends CI_Controller {
         $header = array(
             'title' => 'users',
         );
-        
+
         $content = array(
-          'users' => $users,  
+            'users' => $users,
         );
         $this->load->view('headeradmin', $header);
         $this->load->view('admusers', $content);
         $this->load->view('footer');
+    }
+
+    public function careers() {
+        $header = array(
+            'title' => 'careers',
+        );
+        $this->load->view('headeradmin', $header);
+        $this->load->view('admcareers');
+        $this->load->view('footer');
+    }
+
+    public function programs() {
+        $header = array(
+            'title' => 'programs',
+        );
+        $this->load->view('headeradmin', $header);
+        $this->load->view('admprograms');
+        $this->load->view('footer');
+    }
+
+    public function articles() {
+        $header = array(
+            'title' => 'articles',
+        );
+        $this->load->view('headeradmin', $header);
+        $this->load->view('admarticles');
+        $this->load->view('footer');
+    }
+
+    public function system() {
+        $this->load->model('systemModel');
+        $whole = $this->systemModel->getStatus('wholeweb');
+        foreach ($whole->result() as $row) {
+            $data = array(
+                'whole' => $row->status,
+            );
+        }
+        $header = array(
+            'title' => 'system',
+        );
+        $this->load->view('headeradmin', $header);
+        $this->load->view('admsystem', $data);
+        $this->load->view('footer');
+    }
+
+    public function showWhole() {
+        $this->load->model('systemModel');
+        $this->systemModel('wholeweb', '0');
+        redirect(base_url() . 'admin/system');
+    }
+
+    public function hideWhole() {
+        $this->load->model('systemModel');
+        $this->systemModel->changeStatus('wholeweb', '1');
+        redirect(base_url() . 'admin/system');
     }
 
 }

@@ -48,8 +48,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <nav  class="" >
                             <ul class="sf-menu">
-                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>">Articles</a></li>
-                                <li <?php if ($title == "users") echo 'class="current"'; ?>><a href="#">User</a></li>
+                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/articles">Articles</a></li>
+                                <li <?php if ($title == "programs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/programs">Programs</a></li>
+                                <li <?php if ($title == "careers") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/careers">Careers</a></li>                                
+                                <li <?php if ($title == "users") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/users">User</a></li>                                
+                                <li <?php if ($title == "system") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/system">Maintenance</a></li>
                                 <li <?php if ($title == "logout") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/doLogout">Log Out</a></li>                                                                
                             </ul>
                         </nav>
