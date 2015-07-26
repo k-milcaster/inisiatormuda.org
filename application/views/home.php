@@ -27,18 +27,18 @@
         </div>
         <div class="grid_4">
             <div class="icon">
-                <img src="<?php echo base_url(); ?>public/images/act/Edukasi.jpg" alt="" >
+                <img src="<?php echo base_url(); ?>public/images/act/edukasi.jpg" alt="" >
                 <div class="title">EDUKASI</div>
             </div>
         </div>
         <div class="grid_4">
             <div class="icon">
-                <img src="<?php echo base_url(); ?>public/images/act/Legal.jpg" alt="" >
+                <img src="<?php echo base_url(); ?>public/images/act/legal.jpg" alt="" >
                 <div class="title">LEGAL</div></div>
         </div>
         <div class="grid_4">
             <div class="icon">
-                <img src="<?php echo base_url(); ?>public/images/act/Riset.jpg" alt="" >
+                <img src="<?php echo base_url(); ?>public/images/act/riset.jpg" alt="" >
                 <div class="title">RISET</div>
             </div>
         </div>
@@ -47,37 +47,14 @@
         </div>
         <div class="clear"></div>
         <div class="works">
-            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/Detik.jpg" alt=""></a></div>
-            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/Kompas.png" alt=""></a></div>
-            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images//liputan/Liputan6.jpg" alt=""></a></div>
+            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/detik.jpg" alt=""></a></div>
+            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/kompas.png" alt=""></a></div>
+            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images//liputan/liputan6.jpg" alt=""></a></div>
             <div class="clear"></div>
-            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/Okezone.png" alt=""></a></div>
-            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/Republika.jpg" alt=""></a></div>
-            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/Tempo.png" alt=""></a></div>
+            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/okezone.png" alt=""></a></div>
+            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/republika.jpg" alt=""></a></div>
+            <div class="grid_4"><a href="#"><img src="<?php echo base_url(); ?>public/images/liputan/tempo.png" alt=""></a></div>
         </div>
         <div class="clear"></div>
-        <div class="grid_12">
-            <h3><span>Board Of Advisor</span></h3></div>
-        <div class="grid_6">
-            <blockquote>
-                <img src="<?php echo base_url(); ?>public/images/advisor/RanggaWidigda.jpg" alt="" class="img_inner fleft hvr-bob" style="width: 200px; height: 200px;">
-                <div class="extra_wrapper">
-                    <p></p>
-                    <span class="col2 upp">Rangga Widigda</span>
-                </div>
-            </blockquote>
-        </div>
-        <div class="grid_6">
-            <blockquote>
-                <img src="<?php echo base_url(); ?>public/images/advisor/DamianAgataYuvens.jpg" alt="" class="img_inner fleft hvr-bob" style="width: 200px; height: 200px">
-                <div class="extra_wrapper">
-                    <p></p>
-                    <span class="col2 upp">Damian Agata Yuvens</span>
-                    
-                </div>
-            </blockquote>
-        </div>
-
-
     </div>
 </div>
