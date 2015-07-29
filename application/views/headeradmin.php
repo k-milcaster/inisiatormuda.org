@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="shortcut icon" href="<?php echo base_url(); ?>public/images/favicon.ico" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/form.css">
+        
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/component.css" />
         <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery-migrate-1.1.1.js"></script>
