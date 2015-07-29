@@ -51,7 +51,7 @@
                     <form id="form" method="post" action="<?php echo base_url(); ?>admin/doLogin">               
                         <fieldset>
                             <label class="name">
-                                <input type="text" name="username" placeholder="Userame:" class="field">
+                                <input type="text" name="username" placeholder="Username:" class="field">
                                 <br class="error">
                                 <span class="empty error-empty">*This field is required.</span> </label>
                             <label class="password">

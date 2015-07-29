@@ -24,10 +24,18 @@ class Admin extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
+    private function auth() {
+        if ($this->session->userdata('id_user') !== null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function index() {
 
-        if ($this->session->userdata('id_user') !== null) {
-            redirect(base_url() . "admin/users    ");
+        if ($this->auth()) {
+            redirect(base_url() . "admin/users");
         } else {
 
 //            $header = array(
@@ -60,80 +68,137 @@ class Admin extends CI_Controller {
     }
 
     public function doLogOut() {
-        $this->session->sess_destroy();
-        redirect(base_url());
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->session->sess_destroy();
+            redirect(base_url());
+        }
     }
 
     public function users() {
-        $this->load->model('usersmodel');
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->model('usersmodel');
 
-        $users = $this->usersmodel->getAccountList();
+            $users = $this->usersmodel->getAccountList();
 
-        $header = array(
-            'title' => 'users',
-        );
+            $header = array(
+                'title' => 'users',
+            );
 
-        $content = array(
-            'users' => $users,
-        );
-        $this->load->view('headeradmin', $header);
-        $this->load->view('admusers', $content);
-        $this->load->view('footer');
+            $content = array(
+                'users' => $users,
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admusers', $content);
+            $this->load->view('footer');
+        }
+    }
+
+    public function addUser() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'users',
+            );
+
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admadduser');
+            $this->load->view('footer');
+        }
+    }
+
+    public function doAddUser() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            $repassword = $this->input->post('repassword');
+            $role = $this->input->post('role');
+        }
     }
 
     public function careers() {
-        $header = array(
-            'title' => 'careers',
-        );
-        $this->load->view('headeradmin', $header);
-        $this->load->view('admcareers');
-        $this->load->view('footer');
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'careers',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admcareers');
+            $this->load->view('footer');
+        }
     }
 
     public function programs() {
-        $header = array(
-            'title' => 'programs',
-        );
-        $this->load->view('headeradmin', $header);
-        $this->load->view('admprograms');
-        $this->load->view('footer');
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'programs',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admprograms');
+            $this->load->view('footer');
+        }
     }
 
     public function articles() {
-        $header = array(
-            'title' => 'articles',
-        );
-        $this->load->view('headeradmin', $header);
-        $this->load->view('admarticles');
-        $this->load->view('footer');
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'articles',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admarticles');
+            $this->load->view('footer');
+        }
     }
 
     public function system() {
-        $this->load->model('systemmodel');
-        $whole = $this->systemmodel->getStatus('wholeweb');
-        foreach ($whole->result() as $row) {
-            $data = array(
-                'whole' => $row->status,
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->model('systemmodel');
+            $whole = $this->systemmodel->getStatus('wholeweb');
+            foreach ($whole->result() as $row) {
+                $data = array(
+                    'whole' => $row->status,
+                );
+            }
+            $header = array(
+                'title' => 'system',
             );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admsystem', $data);
+            $this->load->view('footer');
         }
-        $header = array(
-            'title' => 'system',
-        );
-        $this->load->view('headeradmin', $header);
-        $this->load->view('admsystem', $data);
-        $this->load->view('footer');
     }
 
     public function showWhole() {
-        $this->load->model('systemmodel');
-        $this->systemmodel('wholeweb', '0');
-        redirect(base_url() . 'admin/system');
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->model('systemmodel');
+            $this->systemmodel('wholeweb', '0');
+            redirect(base_url() . 'admin/system');
+        }
     }
 
     public function hideWhole() {
-        $this->load->model('systemmodel');
-        $this->systemmodel->changeStatus('wholeweb', '1');
-        redirect(base_url() . 'admin/system');
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->model('systemmodel');
+            $this->systemmodel->changeStatus('wholeweb', '1');
+            redirect(base_url() . 'admin/system');
+        }
     }
 
 }

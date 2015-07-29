@@ -26,7 +26,7 @@
             </tbody>
         </table>
         <div class="grid_6 prefix_1">
-            <div class="btn-red">Add new User...</div>
+            <a href="<?php echo base_url() ?>admin/adduser"><div class="btn-red">Add new User...</div></a>
         </div>
     </div>
 </div>
