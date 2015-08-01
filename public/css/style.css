@@ -186,6 +186,18 @@ ul.list1.l1 li {
     color: #626262;
     background-position: 0 1px;
 }
+
+ul.list1.l2 {
+    padding-top: 16px;
+    float: left;
+    width: 75%;
+}
+
+ul.list1.l2 li {
+    text-decoration: none;
+    color: #626262;
+    background-position: 0 1px;
+}
 /*links*/
 
 a {

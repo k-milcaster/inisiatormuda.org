@@ -104,6 +104,8 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'users',
             );
+            
+            
 
             $this->load->view('headeradmin', $header);
             $this->load->view('admadduser');
@@ -115,10 +117,34 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            $username = $this->input->post('username');
-            $password = $this->input->post('password');
-            $repassword = $this->input->post('repassword');
-            $role = $this->input->post('role');
+            $this->load->helper(array('form', 'url'));
+
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[5]|max_length[12]');
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[5]|matches[repassword]');
+            $this->form_validation->set_rules('repassword', 'Password Confirmation', 'trim|required');
+            $this->form_validation->set_rules('role', 'Role', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $header = array(
+                    'title' => 'users',
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                );
+                $content = array(
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                );
+
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admadduser', $content);
+                $this->load->view('footer');
+            } else {
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+                $repassword = $this->input->post('repassword');
+                $role = $this->input->post('role');
+                echo "true";
+            }
         }
     }
 
