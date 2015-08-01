@@ -1,9 +1,6 @@
 <div class="content"><div class="ic"></div>
     <h2>Web Maintenance</h2>
     <div class="container_12">
-
-
-
         <h3 class="head1">Whole Web</h3>
         <ul class="list">
             <li>

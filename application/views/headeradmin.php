@@ -9,7 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="shortcut icon" href="<?php echo base_url(); ?>public/images/favicon.ico" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/form.css">
-        
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/lib/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/bootstrap-wysihtml5.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/css/component.css" />
         <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery-migrate-1.1.1.js"></script>
@@ -18,6 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>public/js/jquery.easing.1.3.js"></script>        
         <script src="<?php echo base_url(); ?>public/js/forms.js"></script>
 
+        <script src="<?php echo base_url(); ?>public/lib/js/wysihtml5-0.3.0.js"></script>
+        <script src="<?php echo base_url(); ?>public/lib/js/jquery-1.7.2.min.js"></script>
+        <script src="<?php echo base_url(); ?>public/lib/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>public/css/bootstrap3-wysihtml5.js"></script>
         <!--[if (gt IE 9)|!(IE)]><!-->
         <script src="<?php echo base_url(); ?>public/js/jquery.mobile.customized.min.js"></script>
         <!--<![endif]-->
@@ -40,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
         <![endif]-->
     </head>
-    <body  class="">
+    <body class="">
         <header> 
             <div class="container_12">
                 <div class="grid_12"> 
@@ -57,7 +62,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li <?php if ($title == "logout") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/doLogout">Log Out</a></li>                                                                
                             </ul>
                         </nav>
-
                         <div class="clear"></div>
                     </div>
                     <div class="clear"></div>
