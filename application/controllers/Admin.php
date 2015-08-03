@@ -48,13 +48,7 @@ class Admin extends CI_Controller {
             } else {
                 redirect(base_url() . "admin/articles");
             }
-        } else {
-//            $header = array(
-//                'title' => 'Login',
-//            );
-//            if (isset($_POST['login'])) {
-//                $this->validasi_login();
-//            }            
+        } else {        
             $this->load->view('login');
             $this->load->view('footer');
         }
@@ -71,6 +65,7 @@ class Admin extends CI_Controller {
             if ($login->num_rows() > 0) {
                 $row = $login->row_array();
                 $this->session->set_userdata($row);
+                $this->usersmodel->updateLastLogin($username);  
                 redirect(base_url() . "admin");
             } else {
                 $this->load->view('login');

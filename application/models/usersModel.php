@@ -52,6 +52,16 @@ class Usersmodel extends CI_Model {
         $this->db->insert('user', $data);
     }
 
+    public function updateLastLogin($username) {
+        $date = date('Y-m-d H:i:s');
+        $data = array(
+            'lastlogin' => $date,
+        );
+
+        $this->db->where('username', $username);
+        $this->db->update('user', $data);
+    }
+
 //
 //    public function getUsername($username, $password) {
 //        $query = $this->db->query("SELECT usernameAkun, passwordAkun "
