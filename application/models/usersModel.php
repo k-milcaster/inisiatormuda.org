@@ -18,6 +18,40 @@ class Usersmodel extends CI_Model {
         return $query;
     }
 
+    public function userNameAvailable($username) {
+        $query = $this->db->query("SELECT * "
+                . "FROM user WHERE username= '" . $username . "'");
+        if ($query->num_rows() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function addAccount($username, $password, $role) {
+        $date = date('Y-m-d H:i:s');
+        $data = array(
+            'username' => $username,
+            'password' => $password,
+            'registered' => $date,
+            'lastlogin' => $date,
+            'role' => $role,
+        );
+        $this->db->insert('user', $data);
+    }
+
+    public function deleteAccount($username, $password, $role) {
+        $date = date('Y-m-d H:i:s');
+        $data = array(
+            'username' => $username,
+            'password' => $password,
+            'registered' => $date,
+            'lastlogin' => $date,
+            'role' => $role,
+        );
+        $this->db->insert('user', $data);
+    }
+
 //
 //    public function getUsername($username, $password) {
 //        $query = $this->db->query("SELECT usernameAkun, passwordAkun "

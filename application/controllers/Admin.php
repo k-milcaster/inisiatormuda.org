@@ -32,12 +32,23 @@ class Admin extends CI_Controller {
         }
     }
 
+    private function authAdmin() {
+        if ($this->session->userdata('role') === 'administrator') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function index() {
 
         if ($this->auth()) {
-            redirect(base_url() . "admin/users");
+            if ($this->authAdmin()) {
+                redirect(base_url() . "admin/users");
+            } else {
+                redirect(base_url() . "admin/articles");
+            }
         } else {
-
 //            $header = array(
 //                'title' => 'Login',
 //            );
@@ -78,22 +89,31 @@ class Admin extends CI_Controller {
 
     public function users() {
         if (!$this->auth()) {
-            redirect(base_url() . "admin");
+            redirect(base_url() . "admin/users");
         } else {
-            $this->load->model('usersmodel');
+            if ($this->authAdmin()) {
+                $this->load->model('usersmodel');
 
-            $users = $this->usersmodel->getAccountList();
+                $users = $this->usersmodel->getAccountList();
 
-            $header = array(
-                'title' => 'users',
-            );
+                $header = array(
+                    'title' => 'users',
+                );
 
-            $content = array(
-                'users' => $users,
-            );
-            $this->load->view('headeradmin', $header);
-            $this->load->view('admusers', $content);
-            $this->load->view('footer');
+                $content = array(
+                    'users' => $users,
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admusers', $content);
+                $this->load->view('footer');
+            } else {
+                $header = array(
+                    'title' => 'Warning',
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('adminWarning');
+                $this->load->view('footer');
+            }
         }
     }
 
@@ -104,8 +124,8 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'users',
             );
-            
-            
+
+
 
             $this->load->view('headeradmin', $header);
             $this->load->view('admadduser');
@@ -141,9 +161,23 @@ class Admin extends CI_Controller {
             } else {
                 $username = $this->input->post('username');
                 $password = $this->input->post('password');
-                $repassword = $this->input->post('repassword');
                 $role = $this->input->post('role');
-                echo "true";
+                $this->load->model('usersmodel');
+                $usernameAvailable = $this->usersmodel->userNameAvailable($username);
+                if ($usernameAvailable) {
+                    $this->usersmodel->addAccount($username, $password, $role);
+                    redirect(base_url() . "admin/users");
+                } else {
+                    $header = array(
+                        'title' => 'users',
+                    );
+                    $content = array(
+                        'err' => 'Username yang anda pilih sudah dipakai, gunakan username lain'
+                    );
+                    $this->load->view('headeradmin', $header);
+                    $this->load->view('admadduser', $content);
+                    $this->load->view('footer');
+                }
             }
         }
     }
@@ -191,19 +225,28 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            $this->load->model('systemmodel');
-            $whole = $this->systemmodel->getStatus('wholeweb');
-            foreach ($whole->result() as $row) {
-                $data = array(
-                    'whole' => $row->status,
+            if ($this->authAdmin()) {
+                $this->load->model('systemmodel');
+                $whole = $this->systemmodel->getStatus('wholeweb');
+                foreach ($whole->result() as $row) {
+                    $data = array(
+                        'whole' => $row->status,
+                    );
+                }
+                $header = array(
+                    'title' => 'system',
                 );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admsystem', $data);
+                $this->load->view('footer');
+            } else {
+                $header = array(
+                    'title' => 'Warning',
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('adminWarning');
+                $this->load->view('footer');
             }
-            $header = array(
-                'title' => 'system',
-            );
-            $this->load->view('headeradmin', $header);
-            $this->load->view('admsystem', $data);
-            $this->load->view('footer');
         }
     }
 
