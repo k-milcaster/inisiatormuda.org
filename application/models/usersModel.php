@@ -40,16 +40,9 @@ class Usersmodel extends CI_Model {
         $this->db->insert('user', $data);
     }
 
-    public function deleteAccount($username, $password, $role) {
-        $date = date('Y-m-d H:i:s');
-        $data = array(
-            'username' => $username,
-            'password' => $password,
-            'registered' => $date,
-            'lastlogin' => $date,
-            'role' => $role,
-        );
-        $this->db->insert('user', $data);
+    public function deleteAccount($username) {
+        $this->db->where('username', $username);
+        $this->db->delete('user');
     }
 
     public function updateLastLogin($username) {

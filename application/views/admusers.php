@@ -22,7 +22,7 @@
                     <?php
                     foreach ($users->result() as $row) {
 
-                        echo '<tr><td class="user-name">' . $row->id_user . '</td><td class="user-name">' . $row->username . '</td><td class="user-name"> ' . $row->registered . '</td><td class="user-name">' . $row->lastlogin . '</td><td class="user-name">' . $row->role . '</td><td class="user-name"><a href="#"><div class="btn-red">Delete</div></a></td></tr>';
+                        echo '<tr><td class="user-name">' . $row->id_user . '</td><td class="user-name">' . $row->username . '</td><td class="user-name"> ' . $row->registered . '</td><td class="user-name">' . $row->lastlogin . '</td><td class="user-name">' . $row->role . '</td><td class="user-name"><a href="' . base_url() . 'admin/deleteUser/' . $row->username . '"><div class="btn-red">Delete</div></a></td></tr>';
                     }
                     ?>             
                 </tbody>

@@ -9,21 +9,6 @@ class Admin extends CI_Controller {
         $this->load->library('session');
     }
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     * 	- or -
-     * 		http://example.com/index.php/welcome/index
-     * 	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see http://codeigniter.com/user_guide/general/urls.html
-     */
     private function auth() {
         if ($this->session->userdata('id_user') !== null) {
             return true;
@@ -48,7 +33,7 @@ class Admin extends CI_Controller {
             } else {
                 redirect(base_url() . "admin/articles");
             }
-        } else {        
+        } else {
             $this->load->view('login');
             $this->load->view('footer');
         }
@@ -65,7 +50,7 @@ class Admin extends CI_Controller {
             if ($login->num_rows() > 0) {
                 $row = $login->row_array();
                 $this->session->set_userdata($row);
-                $this->usersmodel->updateLastLogin($username);  
+                $this->usersmodel->updateLastLogin($username);
                 redirect(base_url() . "admin");
             } else {
                 $this->load->view('login');
@@ -116,15 +101,21 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            $header = array(
-                'title' => 'users',
-            );
-
-
-
-            $this->load->view('headeradmin', $header);
-            $this->load->view('admadduser');
-            $this->load->view('footer');
+            if ($this->authAdmin()) {
+                $header = array(
+                    'title' => 'users',
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admadduser');
+                $this->load->view('footer');
+            } else {
+                $header = array(
+                    'title' => 'Warning',
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('adminWarning');
+                $this->load->view('footer');
+            }
         }
     }
 
@@ -175,6 +166,29 @@ class Admin extends CI_Controller {
                 }
             }
         }
+    }
+
+    public function deleteUser() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            if ($this->authAdmin()) {
+                $id = $this->uri->segment(3);
+                $this->load->model('usersmodel');
+                $this->usersmodel->deleteAccount($id);
+                redirect(base_url() . "admin");
+            } else {
+                $header = array(
+                    'title' => 'Warning',
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('adminWarning');
+                $this->load->view('footer');
+            }
+        }
+
+
+        echo $id;
     }
 
     public function careers() {
