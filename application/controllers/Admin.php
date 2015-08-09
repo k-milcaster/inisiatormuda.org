@@ -67,9 +67,22 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function staffs() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'staffs',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admstaffs');
+            $this->load->view('footer');
+        }
+    }
+
     public function users() {
         if (!$this->auth()) {
-            redirect(base_url() . "admin/users");
+            redirect(base_url() . "admin");
         } else {
             if ($this->authAdmin()) {
                 $this->load->model('usersmodel');
@@ -186,9 +199,6 @@ class Admin extends CI_Controller {
                 $this->load->view('footer');
             }
         }
-
-
-        echo $id;
     }
 
     public function careers() {
@@ -236,17 +246,15 @@ class Admin extends CI_Controller {
         } else {
             if ($this->authAdmin()) {
                 $this->load->model('systemmodel');
-                $whole = $this->systemmodel->getStatus('wholeweb');
-                foreach ($whole->result() as $row) {
-                    $data = array(
-                        'whole' => $row->status,
-                    );
-                }
+                $data = $this->systemmodel->getStatusList();
                 $header = array(
                     'title' => 'system',
                 );
+                $content = array(
+                    'data' => $data,
+                );
                 $this->load->view('headeradmin', $header);
-                $this->load->view('admsystem', $data);
+                $this->load->view('admsystem', $content);
                 $this->load->view('footer');
             } else {
                 $header = array(
@@ -259,23 +267,29 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function showWhole() {
+    public function show() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            $this->load->model('systemmodel');
-            $this->systemmodel('wholeweb', '0');
-            redirect(base_url() . 'admin/system');
+            if ($this->authAdmin()) {
+                $id = $this->uri->segment(3);
+                $this->load->model('systemmodel');
+                $this->systemmodel->changeStatus($id, '0');
+                redirect(base_url() . 'admin/system');
+            }
         }
     }
 
-    public function hideWhole() {
+    public function hide() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            $this->load->model('systemmodel');
-            $this->systemmodel->changeStatus('wholeweb', '1');
-            redirect(base_url() . 'admin/system');
+            if ($this->authAdmin()) {
+                $id = $this->uri->segment(3);
+                $this->load->model('systemmodel');
+                $this->systemmodel->changeStatus($id, '1');
+                redirect(base_url() . 'admin/system');
+            }
         }
     }
 

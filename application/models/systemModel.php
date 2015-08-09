@@ -13,9 +13,15 @@ class Systemmodel extends CI_Model {
         return $query;
     }
 
+    public function getStatusList() {
+        $query = $this->db->query("SELECT * "
+                . "FROM system");
+        return $query;
+    }
+
     public function changeStatus($name, $status) {
         $data = array(
-            'status' => $status,            
+            'status' => $status,
         );
         $this->db->where('name', $name);
         $this->db->update('system', $data);
