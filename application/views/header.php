@@ -61,10 +61,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <li><a href="<?php echo base_url(); ?>about/initiator">Initiators</a></li>
                                     </ul>
                                 </li>
-                                <li <?php if ($title == "Programs") echo 'class="current"'; ?>><a href="#">Program</a></li>
+                                <li <?php if ($title == "Programs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>program">Program</a></li>
                                 <li <?php if ($title == "Partners") echo 'class="current"'; ?>><a href="#">Partners</a></li>
                                 <li <?php if ($title == "Contacts") echo 'class="current"'; ?>><a href="#">Contacts</a></li>
-                                <li <?php if ($title == "Career") echo 'class="current"'; ?>><a href="#">Career</a></li>
+                                <li <?php if ($title == "Career") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>career">Career</a></li>
                                 <li <?php if ($title == "Blog") echo 'class="current"'; ?>><a href="#">Blog</a></li>
                             </ul>
                         </nav>
