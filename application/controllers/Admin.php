@@ -148,7 +148,6 @@ class Admin extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $header = array(
                     'title' => 'users',
-                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
                 );
                 $content = array(
                     'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
@@ -218,13 +217,88 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
+            $this->load->model('programsmodel');
+            $progs = $this->programsmodel->getProgramsList();
+            $header = array(
+                'title' => 'programs',
+            );
+            $content = array(
+                'users' => $progs,
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admprograms', $content);
+            $this->load->view('footer');
+        }
+    }
+
+    public function addPrograms() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
             $header = array(
                 'title' => 'programs',
             );
             $this->load->view('headeradmin', $header);
-            $this->load->view('admprograms');
+            $this->load->view('admaddprogram');
             $this->load->view('footer');
         }
+    }
+
+    public function doAddProgram() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('progname', 'Progname', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('progloc', 'Progloc', 'trim|required|min_length[4]|max_length[45]');
+            $this->form_validation->set_rules('progdesc', 'Progdesc', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $header = array(
+                    'title' => 'programs',
+                );
+                $content = array(
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                );
+
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admaddprogram', $content);
+                $this->load->view('footer');
+            } else {
+                $dateposted = date('YmdHis');
+                $id = $dateposted;
+                $name = $this->input->post('progname');
+                $date = $this->input->post('progdate');
+                $loc = $this->input->post('progloc');
+                $desc = $this->input->post('progdesc');
+
+                $new_name = 'IMG' . $id; //renaming
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = 'public/images/programs/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size'] = '2000';
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $header = array(
+                        'title' => 'programs',
+                    );
+                    $upload_error = array('err' => $this->upload->display_errors());
+                    $this->load->view('headeradmin', $header);
+                    $this->load->view('admaddprogram', $upload_error);
+                    $this->load->view('footer');
+                } else {
+                    $upload_data = $this->upload->data();
+                    $this->load->model('programsmodel');
+                    $this->programsmodel->addprogram($id, $name, $date, $loc, $desc, $upload_data['file_name']);
+                    redirect(base_url() . "admin/programs");
+                }
+            }
+        }
+        //
     }
 
     public function articles() {
