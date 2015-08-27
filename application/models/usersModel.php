@@ -50,7 +50,6 @@ class Usersmodel extends CI_Model {
         $data = array(
             'lastlogin' => $date,
         );
-
         $this->db->where('username', $username);
         $this->db->update('user', $data);
     }
