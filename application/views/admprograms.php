@@ -23,7 +23,7 @@
                     <?php
                     foreach ($users->result() as $row) {
 
-                        echo '<tr><td class="user-name">' . $row->id_programs . '</td><td class="user-name">' . $row->name_programs . '</td><td class="user-name"> ' . $row->date_programs . '</td><td class="user-name">' . $row->location_programs . '</td><td class="user-name">' . $row->posteddate_programs . '</td><td class="user-name"><a href="' . base_url() . 'admin/deleteUser/' . $row->id_programs . '"><div class="btn-red">Update </td><td class="user-name"><a href="' . base_url() . 'admin/deleteUser/' . $row->id_programs . '"><div class="btn-red">Delete</div></a></td></tr>';
+                        echo '<tr><td class="user-name">' . $row->id_programs . '</td><td class="user-name">' . $row->name_programs . '</td><td class="user-name"> ' . $row->date_programs . '</td><td class="user-name">' . $row->location_programs . '</td><td class="user-name">' . $row->posteddate_programs . '</td><td class="user-name"><a href="' . base_url() . 'admin/updateProgram/' . $row->id_programs . '"><div class="btn-red">Update </td><td class="user-name"><a href="' . base_url() . 'admin/deleteProgram/' . $row->id_programs . '"><div class="btn-red">Delete</div></a></td></tr>';
                     }
                     ?>             
                 </tbody>

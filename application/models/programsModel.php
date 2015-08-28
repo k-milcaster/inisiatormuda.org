@@ -28,7 +28,7 @@ class Programsmodel extends CI_Model {
 
     public function getProgram($id) {     
         $this->db->where('id_programs', $id);
-        $query = $query = $this->db->get('mytable');
+        $query = $this->db->get('programs');
         return $query;
     }
 
@@ -37,7 +37,7 @@ class Programsmodel extends CI_Model {
         $this->db->delete('programs');
     }
 
-    public function updatePrograms($id, $name, $date, $loc, $desc, $img) {
+    public function updateProgram($id, $name, $date, $loc, $desc, $img) {
         $dateposted = date('Y-m-d H:i:s');
         $data = array(            
             'name_programs' => $name,
