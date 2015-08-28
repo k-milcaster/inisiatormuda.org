@@ -57,6 +57,22 @@ class Admin extends CI_Controller {
             }
         }
     }
+    
+    
+     public function posting() {
+        $teks = $this->input->post('teks');
+        $category = $this->input->post('listcategory');
+        if ($teks == '' || $category == '') {
+            redirect(base_url() . "Admin/articles");
+        } else {
+            $this->load->model('articleModel');
+            $this->articleModel->insertarticle($category,$teks,$this->session->userdata('id_user'));
+            
+            
+        }
+    }
+    
+    
 
     public function doLogOut() {
         if (!$this->auth()) {
@@ -300,6 +316,22 @@ class Admin extends CI_Controller {
         }
         //
     }
+    
+    public function direktoriarticle() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'articles',
+            );
+
+
+
+            $this->load->view('headeradmin', $header);
+            $this->load->view('direktoriarticle');
+            $this->load->view('footer');
+        }
+    }
 
     public function articles() {
         if (!$this->auth()) {
@@ -308,6 +340,22 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'articles',
             );
+
+            $this->load->model("articleModel");
+            $querycategory = $this->articleModel->getCategory();
+            $setcat = '';
+            $setcat = $setcat . ' <select name = "listcategory"; class="form-control">
+                                <option value = "0">Pilih Kategori</option>
+                                ';
+            foreach ($querycategory->result_array() as $row) {
+                $setcat = $setcat . '
+                                <option value = "' . $row['id_category'] . '">' . $row['category'] . '</option>';
+            }
+            $setcat = $setcat . '</select>';
+            $this->session->set_flashdata('setcat', $setcat);
+
+
+
             $this->load->view('headeradmin', $header);
             $this->load->view('admarticles');
             $this->load->view('footer');
