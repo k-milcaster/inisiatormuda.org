@@ -1,20 +1,25 @@
 <div class="content"><div class="ic"></div>
     <h2>Write Article</h2>
-    <div class="container_12">                            
+    <div class="container_12">                  
+        <form id="form" method="post" action="<?php echo base_url(); ?>admin/posting">
         <div class="hero-unit" style="margin-top:5%">
+           
             <div class="hero-unit">
-                <input type="text" class="form-control" id="title" name="judul" placeholder="Judul Artikel" value="">
-                <br>
-                <input type="text" class="form-control" id="title" name="category" placeholder="Judul Artikel" value="">
+                
+                <?php
+                                    $a = $this->session->flashdata('setcat');
+
+                                    echo $a;
+                                    ?>
             </div>
 
-            <hr/>
-            <textarea class="textarea form-control" placeholder="Enter text ..." style="width: 810px; height: 200px"></textarea>
+            <textarea name = "teks"class="textarea form-control" placeholder="Enter text ..." style="width: 950px; height: 200px"></textarea>
         </div>
         <br>
-        <button class="btn btn-large btn-danger">POSTING</button>       
+        <button name="save" class="btn btn-large btn-danger">SAVE ARTICLE</button>       
         <script>
             $('.textarea').wysihtml5();
         </script>
+        </form>
     </div>
 </div>
