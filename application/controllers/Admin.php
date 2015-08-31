@@ -434,8 +434,9 @@ class Admin extends CI_Controller {
                 $date = $this->input->post('progdate');
                 $loc = $this->input->post('progloc');
                 $desc = $this->input->post('progdesc');
+                $oriimg = $this->input->post('progimg');
 
-                $new_name = 'IMG' . $id;
+                $new_name = 'img' . $id;
                 $config['file_name'] = $new_name;
                 $config['upload_path'] = 'public/images/programs/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
@@ -444,14 +445,10 @@ class Admin extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
-                if (!$this->upload->do_upload('userfile')) {
-                    $header = array(
-                        'title' => 'programs',
-                    );
-                    $upload_error = array('err' => $this->upload->display_errors());
-                    $this->load->view('headeradmin', $header);
-                    $this->load->view('admaddprogram', $upload_error);
-                    $this->load->view('footer');
+                if (!$this->upload->do_upload('userfile')) {                    
+                    $this->load->model('programsmodel');
+                    $this->programsmodel->updateprogram($id, $name, $date, $loc, $desc, $oriimg);
+                    redirect(base_url() . "admin/programs");
                 } else {
                     $upload_data = $this->upload->data();
                     $this->load->model('programsmodel');

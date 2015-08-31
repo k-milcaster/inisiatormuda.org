@@ -14,7 +14,7 @@
                         <?php
                         foreach ($prog->result() as $row) {
                             echo '<input type="hidden" name="progid" value="' . $row->id_programs . '">';
-                            
+                            echo '<input type="hidden" name="progimg" value="'. $row->img_programs .'">';
                             echo '<label class="name">
                             <input type="text" name="progname" placeholder="Program Name:" value="' . $row->name_programs . '" class="field">
                             <br class="error">
