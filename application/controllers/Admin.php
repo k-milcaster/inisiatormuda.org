@@ -385,7 +385,7 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function updatePrograms() {
+    public function updateProgram() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
@@ -411,7 +411,8 @@ class Admin extends CI_Controller {
             $this->load->helper(array('form', 'url'));
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('progname', 'Progname', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('progid', 'Progid', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('progname', 'Progname', 'trim|required|min_length[2]|max_length[45]');            
             $this->form_validation->set_rules('progloc', 'Progloc', 'trim|required|min_length[4]|max_length[45]');
             $this->form_validation->set_rules('progdesc', 'Progdesc', 'trim|required');
 
@@ -438,6 +439,7 @@ class Admin extends CI_Controller {
                 $config['file_name'] = $new_name;
                 $config['upload_path'] = 'public/images/programs/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['overwrite'] = 'TRUE';
                 $config['max_size'] = '2000';
 
                 $this->load->library('upload', $config);
