@@ -12,12 +12,14 @@ class articleModel extends CI_Model {
         return $query;
     }
     
-    public function insertarticle($param1, $param2,$param3) {
+    public function insertarticle($param1, $param2,$param3,$param4,$param5) {
         $new_article = array(
        'id_article' => null,
        'id_category' => $param1,
        'content' => $param2,
-       'user_id_user' =>$param3
+       'user_id_user' =>$param3,
+       'title'=>$param4,
+       'postdate'=>$param5,
        
        
          

@@ -3,20 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Admin.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/programsModel.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admprograms.php</file>
-=======
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admarticles.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/login.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Blog.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/usersModel.php</file>
             <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/articleModel.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admsystem.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/direktoriarticle.php</file>
             <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Admin.php</file>
->>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

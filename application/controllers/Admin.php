@@ -57,22 +57,50 @@ class Admin extends CI_Controller {
             }
         }
     }
-    
-    
-     public function posting() {
+
+    public function posting() {
         $teks = $this->input->post('teks');
         $category = $this->input->post('listcategory');
         if ($teks == '' || $category == '') {
             redirect(base_url() . "Admin/articles");
         } else {
             $this->load->model('articleModel');
-            $this->articleModel->insertarticle($category,$teks,$this->session->userdata('id_user'));
+
+            $pieces = explode("</h1>", $teks);
+            $title = $pieces[0].'</h1>';
+            if ($pieces[0] == "") {
+                $pieces = explode("</h2>", $teks);
+                $title = '';
+                $title = $pieces[0].'</h2>';
+                if ($pieces[0] == "") {
+                    $pieces = explode("</h3>", $teks);
+                    $title = '';
+                    $title = $pieces[0].'</h3>';
+                    if ($pieces[0] == "") {
+                        $pieces = explode("</h4>", $teks);
+                        $title = '';
+                        $title = $pieces[0].'</h4>';
+                        if ($pieces[0] == "") {
+                            $pieces = explode("</h5>", $teks);
+                            $title = '';
+                            $title = $pieces[0].'</h5>';
+                            if ($pieces[0] == "") {
+                                $pieces = explode("</h6>", $teks);
+                                $title = '';
+                                $title = $pieces[0].'</h6>';
+                            }
+                        }
+                    }
+                }
+            }
             
+
+            $dateTime = date('Y-m-d H:i:s');
+            $this->articleModel->insertarticle($category,$pieces[1], $this->session->userdata('id_user'),$title,$dateTime);
+            redirect(base_url() ."admin/articles");
             
-        }
+                            }
     }
-    
-    
 
     public function doLogOut() {
         if (!$this->auth()) {
@@ -316,7 +344,7 @@ class Admin extends CI_Controller {
         }
         //
     }
-    
+
     public function direktoriarticle() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
@@ -375,7 +403,7 @@ class Admin extends CI_Controller {
                 $this->load->view('admupdprogram', $content);
                 $this->load->view('footer');
             } else {
-                
+
                 $id = $this->input->post('progid');
                 $name = $this->input->post('progname');
                 $date = $this->input->post('progdate');
