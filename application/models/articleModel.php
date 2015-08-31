@@ -31,4 +31,12 @@ class articleModel extends CI_Model {
         
     }
 
+    public function getarticles() {
+        $query = $this->db->query("SELECT * FROM article");
+        return $query;
+    }
+    public function getarticlesbyid() {
+        
+    }
+    
 }

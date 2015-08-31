@@ -67,39 +67,38 @@ class Admin extends CI_Controller {
             $this->load->model('articleModel');
 
             $pieces = explode("</h1>", $teks);
-            $title = $pieces[0].'</h1>';
+            $title = $pieces[0] . '</h1>';
             if ($pieces[0] == "") {
                 $pieces = explode("</h2>", $teks);
                 $title = '';
-                $title = $pieces[0].'</h2>';
+                $title = $pieces[0] . '</h2>';
                 if ($pieces[0] == "") {
                     $pieces = explode("</h3>", $teks);
                     $title = '';
-                    $title = $pieces[0].'</h3>';
+                    $title = $pieces[0] . '</h3>';
                     if ($pieces[0] == "") {
                         $pieces = explode("</h4>", $teks);
                         $title = '';
-                        $title = $pieces[0].'</h4>';
+                        $title = $pieces[0] . '</h4>';
                         if ($pieces[0] == "") {
                             $pieces = explode("</h5>", $teks);
                             $title = '';
-                            $title = $pieces[0].'</h5>';
+                            $title = $pieces[0] . '</h5>';
                             if ($pieces[0] == "") {
                                 $pieces = explode("</h6>", $teks);
                                 $title = '';
-                                $title = $pieces[0].'</h6>';
+                                $title = $pieces[0] . '</h6>';
                             }
                         }
                     }
                 }
             }
-            
+
 
             $dateTime = date('Y-m-d H:i:s');
-            $this->articleModel->insertarticle($category,$pieces[1], $this->session->userdata('id_user'),$title,$dateTime);
-            redirect(base_url() ."admin/articles");
-            
-                            }
+            $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
+            redirect(base_url() . "admin/articles");
+        }
     }
 
     public function doLogOut() {
@@ -352,8 +351,33 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'articles',
             );
+//$pieces = explode("</h1>", $teks);
+//$string = substr($string,0,10).'...';
 
-
+            $this->load->model("articleModel"); 
+            $querycategory = $this->articleModel->getarticles();
+            $right='';
+            $left='';
+            $title='';
+            $articlescut='';
+            $i=0;
+           
+            foreach ($querycategory->result_array() as $row) {
+                $title ='<h3><span>'.$row['title'].'</span></h3>';
+                $articlescut = '<p class="col3">'.substr($row['content'], 5,65).'...</p><a href="#" class="btn">PUBLISH</a>
+           <a href="#" class="btn">RECOMMEND</a><a href="#" class="btn">EDIT</a><a href="#" class="btn">DELETE</a>';
+                $a=$i%2;
+                if($a==0){
+                    $left=$left.$title.$articlescut;
+                }
+                else{
+                    $right=$right.$title.$articlescut;
+                }
+              $i++;  
+            }
+            $this->session->set_flashdata('right', $right);
+            $this->session->set_flashdata('left', $left);
+            
 
             $this->load->view('headeradmin', $header);
             $this->load->view('direktoriarticle');
