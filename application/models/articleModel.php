@@ -32,6 +32,10 @@ class articleModel extends CI_Model {
         
         
     }
+    
+    public function editarticle($param) {
+        
+    }
 
     public function getarticles() {
         $query = $this->db->query("SELECT * FROM article");

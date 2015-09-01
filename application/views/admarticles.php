@@ -13,7 +13,7 @@
                                     ?>
             </div>
 
-            <textarea name = "teks"class="textarea form-control" placeholder="Enter text ..." style="width: 950px; height: 200px"></textarea>
+            <textarea name = "teks"class="textarea form-control"  placeholder="Enter text ..." style="width: 950px; height: 200px" ></textarea>
         </div>
         <br>
         <button name="save" class="btn btn-large btn-danger">SAVE ARTICLE</button>       

@@ -351,9 +351,8 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'articles',
             );
-//$pieces = explode("</h1>", $teks);
-//$string = substr($string,0,10).'...';
 
+            
             $this->load->model("articleModel");
             $querycategory = $this->articleModel->getarticles();
             $right = '';
@@ -373,10 +372,10 @@ class Admin extends CI_Controller {
                     $articlescut=$articlescut.'</p><a href="'.base_url().'Admin/updatepublished/'.$row['id_article'].'/'.$row['published'].'" class="btn">PUBLISHED</a>';
                 }
                 if($row['recommended']==1){
-                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">RECOMMENDED</a><a href="" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
+                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">RECOMMENDED</a><a href="'.base_url().'Admin/editarticle/'.$row['id_article'].'/'.$row['title'].'/'.$row['content'].'/'.$row['id_category'].'" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
                 }
                 else{
-                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">UNRECOMMENDED</a><a href="" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
+                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">UNRECOMMENDED</a><a href="'.base_url().'Admin/editarticle/'.$row['id_article'].'/'.$row['title'].'/'.$row['content'].'/'.$row['id_category'].'" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
                 }
                 
                 $a = $i % 2;
@@ -395,6 +394,16 @@ class Admin extends CI_Controller {
             $this->load->view('direktoriarticle');
             $this->load->view('footer');
         }
+    }
+    
+    
+    public function editarticle($param,$param2,$param3,$param4){
+        $this->load->database();
+        $this->load->model("articleModel");
+        
+//1-4
+//        $query = $this->articleModel->editarticle($param);
+        redirect(base_url().'Admin/direktoriarticle');
     }
     
     public function updatepublished($param,$param2) {
