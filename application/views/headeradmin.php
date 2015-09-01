@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <nav  class="" >
                             <ul class="sf-menu">
-                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/articles">Articles</a></li>
+                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/direktoriarticle">Articles</a></li>
                                 <li <?php if ($title == "staffs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/staffs">Staffs</a></li>
                                 <li <?php if ($title == "programs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/programs">Programs</a></li>
                                 <li <?php if ($title == "careers") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/careers">Careers</a></li>                                

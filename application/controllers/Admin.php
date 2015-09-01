@@ -354,36 +354,73 @@ class Admin extends CI_Controller {
 //$pieces = explode("</h1>", $teks);
 //$string = substr($string,0,10).'...';
 
-            $this->load->model("articleModel"); 
+            $this->load->model("articleModel");
             $querycategory = $this->articleModel->getarticles();
-            $right='';
-            $left='';
-            $title='';
-            $articlescut='';
-            $i=0;
-           
+            $right = '';
+            $left = '';
+            $title = '';
+            $articlescut = '';
+            $i = 0;
+
             foreach ($querycategory->result_array() as $row) {
-                $title ='<h3><span>'.$row['title'].'</span></h3>';
-                $articlescut = '<p class="col3">'.substr($row['content'], 5,65).'...</p><a href="#" class="btn">PUBLISH</a>
-           <a href="#" class="btn">RECOMMEND</a><a href="#" class="btn">EDIT</a><a href="#" class="btn">DELETE</a>';
-                $a=$i%2;
-                if($a==0){
-                    $left=$left.$title.$articlescut;
+                $title = '<h3><span>' . $row['title'] . '</span></h3>';
+                $articlescut = '<p class="col3">' . substr($row['content'], 5, 45) . '...';
+
+                if($row['published']==0){
+                    $articlescut=$articlescut.'</p><a href="'.base_url().'Admin/updatepublished/'.$row['id_article'].'/'.$row['published'].'" class="btn">PUBLISH</a>';
                 }
                 else{
-                    $right=$right.$title.$articlescut;
+                    $articlescut=$articlescut.'</p><a href="'.base_url().'Admin/updatepublished/'.$row['id_article'].'/'.$row['published'].'" class="btn">PUBLISHED</a>';
                 }
-              $i++;  
+                if($row['recommended']==1){
+                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">RECOMMENDED</a><a href="" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
+                }
+                else{
+                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">UNRECOMMENDED</a><a href="" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
+                }
+                
+                $a = $i % 2;
+                if ($a == 0) {
+                    $left = $left . $title . $articlescut;
+                } else {
+                    $right = $right . $title . $articlescut;
+                }
+                $i++;
             }
             $this->session->set_flashdata('right', $right);
             $this->session->set_flashdata('left', $left);
-            
+
 
             $this->load->view('headeradmin', $header);
             $this->load->view('direktoriarticle');
             $this->load->view('footer');
         }
     }
+    
+    public function updatepublished($param,$param2) {
+       
+        
+        
+        $this->load->database();
+         $this->load->model("articleModel");
+        $query = $this->articleModel->updatepublished($param,$param2);
+        redirect(base_url().'Admin/direktoriarticle'); 
+    }
+    
+    public function updaterecommended($param,$param2) {
+        $this->load->database();
+         $this->load->model("articleModel");
+        $query = $this->articleModel->updaterecommended($param,$param2);
+        redirect(base_url().'Admin/direktoriarticle'); 
+    }
+    
+    public function deletearticle($param) {
+        $this->load->database();
+         $this->load->model("articleModel");
+        $query = $this->articleModel->deletearticles($param);
+        redirect(base_url().'Admin/direktoriarticle'); 
+    }
+    
 
     public function updateProgram() {
         if (!$this->auth()) {
@@ -412,7 +449,7 @@ class Admin extends CI_Controller {
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('progid', 'Progid', 'trim|required|min_length[2]|max_length[45]');
-            $this->form_validation->set_rules('progname', 'Progname', 'trim|required|min_length[2]|max_length[45]');            
+            $this->form_validation->set_rules('progname', 'Progname', 'trim|required|min_length[2]|max_length[45]');
             $this->form_validation->set_rules('progloc', 'Progloc', 'trim|required|min_length[4]|max_length[45]');
             $this->form_validation->set_rules('progdesc', 'Progdesc', 'trim|required');
 
@@ -445,7 +482,7 @@ class Admin extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
-                if (!$this->upload->do_upload('userfile')) {                    
+                if (!$this->upload->do_upload('userfile')) {
                     $this->load->model('programsmodel');
                     $this->programsmodel->updateprogram($id, $name, $date, $loc, $desc, $oriimg);
                     redirect(base_url() . "admin/programs");

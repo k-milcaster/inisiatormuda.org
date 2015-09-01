@@ -2,7 +2,7 @@
         <div class="content"><div class="ic"></div>
     <div class="container_12">
         <div class="grid_6">
-            <a href="#" class="btn">BUAT ARTIKEL</a>
+            <a href="<?php base_url()?>articles " class="btn">BUAT ARTIKEL</a>
             <?php
                                     $a = $this->session->flashdata('left');
 

@@ -20,6 +20,8 @@ class articleModel extends CI_Model {
        'user_id_user' =>$param3,
        'title'=>$param4,
        'postdate'=>$param5,
+       'published'=>0,
+       'recommended'=>0
        
        
          
@@ -35,6 +37,35 @@ class articleModel extends CI_Model {
         $query = $this->db->query("SELECT * FROM article");
         return $query;
     }
+    
+    public function updatepublished($param,$param2) {
+        if($param2==0){
+            $query = $this->db->query("UPDATE  article SET  published =  1 WHERE  id_article =".$param);
+        return $query;
+        }
+        else{
+            $query = $this->db->query("UPDATE  article SET  published =  0 WHERE  id_article =".$param);
+        return $query;
+        }
+    }
+    public function updaterecommended($param,$param2) {
+        
+        if($param2==0){
+            $query = $this->db->query("UPDATE  article SET  recommended =  1 WHERE  id_article =".$param);
+        return $query;
+        }
+        else{
+            $query = $this->db->query("UPDATE  article SET  recommended =  0 WHERE  id_article =".$param);
+        return $query;
+        }
+        
+        
+    }
+    public function deletearticles($param) {
+        $query = $this->db->query("DELETE FROM `article`  WHERE  id_article =".$param);
+        return $query;
+    }
+    
     public function getarticlesbyid() {
         
     }
