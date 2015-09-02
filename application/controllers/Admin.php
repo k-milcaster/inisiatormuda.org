@@ -325,8 +325,6 @@ class Admin extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
-
-
                 if (!$this->upload->do_upload('userfile')) {
                     $header = array(
                         'title' => 'programs',
@@ -338,27 +336,10 @@ class Admin extends CI_Controller {
                 } else {
                     $upload_data = $this->upload->data();
                     $this->load->model('programsmodel');
-                    $this->cropImage($upload_data['file_name']);
                     $this->programsmodel->addprogram($id, $name, $date, $loc, $desc, $upload_data['file_name']);
-                    //redirect(base_url() . "admin/programs");
+                    redirect(base_url() . "admin/programs");
                 }
             }
-        }
-    }
-
-    private function cropImage($name) {
-        $this->load->library('image_lib');
-        
-        $config['new_image'] = 'public/images/programs/thumb/' . $name;
-        $config['image_library'] = 'imagemagick';
-        $config['library_path'] = 'public/images/';
-        $config['source_image'] = 'public/images/programs/' . $name;
-        $config['x_axis'] = '100';
-        $config['y_axis'] = '60';
-
-        $this->image_lib->initialize($config);
-        if (!$this->image_lib->crop()) {
-            echo $this->image_lib->display_errors();
         }
     }
 

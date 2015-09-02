@@ -28,24 +28,26 @@
         <div class="port">
             <?php
             $count = 0;
-            $flag = 1;        
+            $flag = 1;
             foreach ($programs->result() as $row) {
-                $count++;                                
+                $count++;
                 if ($flag == $page) {
                     echo '<div class="grid_4">
-                        <a href="' . base_url() . 'program/id/' . $row->id_programs . '" class="gal"><img src="' . base_url() . 'public/images/programs/' . $row->img_programs . '" alt=""></a>
+                        <a href="' . base_url() . 'program/id/' . $row->id_programs . '" class="gal">'
+                    . '<img src="' . base_url() . 'public/images/programs/' . $row->img_programs . '" alt=""></a>
                         <div class="text1 col1">' . $row->name_programs . '</div>
                         ' . $row->location_programs . '<br>                        
                    </div>';
+                    if ($count % 3 == 0) {
+                        echo '<div class="clear"></div>';
+                    }
                 }
-                if ($count % 3 == 0) {
-                    echo '<div class="clear"></div>';
-                }
+
                 if ($count == 6) {
                     echo '<div class="clear"></div>';
-                    $flag++;                    
+                    $flag++;
                     $count = 0;
-                }                
+                }
             }
             ?>
             <div class="clear"></div>
