@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/camera.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/form.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/touchTouch.css">
         <link href="<?php echo base_url(); ?>public/css/hover.css" rel="stylesheet" media="all">
         <link href="<?php echo base_url(); ?>public/css/hover-min.css" rel="stylesheet" media="all">
         <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
@@ -19,6 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>public/js/jquery.easing.1.3.js"></script>
         <script src="<?php echo base_url(); ?>public/js/camera.js"></script>
         <script src="<?php echo base_url(); ?>public/js/forms.js"></script>
+        
 
         <!--[if (gt IE 9)|!(IE)]><!-->
         <script src="<?php echo base_url(); ?>public/js/jquery.mobile.customized.min.js"></script>

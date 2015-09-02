@@ -325,6 +325,8 @@ class Admin extends CI_Controller {
 
                 $this->load->library('upload', $config);
 
+
+
                 if (!$this->upload->do_upload('userfile')) {
                     $header = array(
                         'title' => 'programs',
@@ -336,12 +338,28 @@ class Admin extends CI_Controller {
                 } else {
                     $upload_data = $this->upload->data();
                     $this->load->model('programsmodel');
+                    $this->cropImage($upload_data['file_name']);
                     $this->programsmodel->addprogram($id, $name, $date, $loc, $desc, $upload_data['file_name']);
-                    redirect(base_url() . "admin/programs");
+                    //redirect(base_url() . "admin/programs");
                 }
             }
         }
-        //
+    }
+
+    private function cropImage($name) {
+        $this->load->library('image_lib');
+        
+        $config['new_image'] = 'public/images/programs/thumb/' . $name;
+        $config['image_library'] = 'imagemagick';
+        $config['library_path'] = 'public/images/';
+        $config['source_image'] = 'public/images/programs/' . $name;
+        $config['x_axis'] = '100';
+        $config['y_axis'] = '60';
+
+        $this->image_lib->initialize($config);
+        if (!$this->image_lib->crop()) {
+            echo $this->image_lib->display_errors();
+        }
     }
 
     public function direktoriarticle() {
@@ -352,7 +370,7 @@ class Admin extends CI_Controller {
                 'title' => 'articles',
             );
 
-            
+
             $this->load->model("articleModel");
             $querycategory = $this->articleModel->getarticles();
             $right = '';
@@ -365,19 +383,17 @@ class Admin extends CI_Controller {
                 $title = '<h3><span>' . $row['title'] . '</span></h3>';
                 $articlescut = '<p class="col3">' . substr($row['content'], 5, 45) . '...';
 
-                if($row['published']==0){
-                    $articlescut=$articlescut.'</p><a href="'.base_url().'Admin/updatepublished/'.$row['id_article'].'/'.$row['published'].'" class="btn">PUBLISH</a>';
+                if ($row['published'] == 0) {
+                    $articlescut = $articlescut . '</p><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '" class="btn">PUBLISH</a>';
+                } else {
+                    $articlescut = $articlescut . '</p><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '" class="btn">PUBLISHED</a>';
                 }
-                else{
-                    $articlescut=$articlescut.'</p><a href="'.base_url().'Admin/updatepublished/'.$row['id_article'].'/'.$row['published'].'" class="btn">PUBLISHED</a>';
+                if ($row['recommended'] == 1) {
+                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">RECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '/' . $row['title'] . '/' . $row['content'] . '/' . $row['id_category'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
+                } else {
+                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">UNRECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '/' . $row['title'] . '/' . $row['content'] . '/' . $row['id_category'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
                 }
-                if($row['recommended']==1){
-                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">RECOMMENDED</a><a href="'.base_url().'Admin/editarticle/'.$row['id_article'].'/'.$row['title'].'/'.$row['content'].'/'.$row['id_category'].'" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
-                }
-                else{
-                    $articlescut=$articlescut.'<a href="'.base_url().'Admin/updaterecommended/'.$row['id_article'].'/'.$row['recommended'].'" class="btn">UNRECOMMENDED</a><a href="'.base_url().'Admin/editarticle/'.$row['id_article'].'/'.$row['title'].'/'.$row['content'].'/'.$row['id_category'].'" class="btn">EDIT</a><a href="'.base_url().'Admin/deletearticle/'.$row['id_article'].'" class="btn">DELETE</a>';
-                }
-                
+
                 $a = $i % 2;
                 if ($a == 0) {
                     $left = $left . $title . $articlescut;
@@ -395,41 +411,39 @@ class Admin extends CI_Controller {
             $this->load->view('footer');
         }
     }
-    
-    
-    public function editarticle($param,$param2,$param3,$param4){
+
+    public function editarticle($param, $param2, $param3, $param4) {
         $this->load->database();
         $this->load->model("articleModel");
-        
+
 //1-4
 //        $query = $this->articleModel->editarticle($param);
-        redirect(base_url().'Admin/direktoriarticle');
+        redirect(base_url() . 'Admin/direktoriarticle');
     }
-    
-    public function updatepublished($param,$param2) {
-       
-        
-        
+
+    public function updatepublished($param, $param2) {
+
+
+
         $this->load->database();
-         $this->load->model("articleModel");
-        $query = $this->articleModel->updatepublished($param,$param2);
-        redirect(base_url().'Admin/direktoriarticle'); 
+        $this->load->model("articleModel");
+        $query = $this->articleModel->updatepublished($param, $param2);
+        redirect(base_url() . 'Admin/direktoriarticle');
     }
-    
-    public function updaterecommended($param,$param2) {
+
+    public function updaterecommended($param, $param2) {
         $this->load->database();
-         $this->load->model("articleModel");
-        $query = $this->articleModel->updaterecommended($param,$param2);
-        redirect(base_url().'Admin/direktoriarticle'); 
+        $this->load->model("articleModel");
+        $query = $this->articleModel->updaterecommended($param, $param2);
+        redirect(base_url() . 'Admin/direktoriarticle');
     }
-    
+
     public function deletearticle($param) {
         $this->load->database();
-         $this->load->model("articleModel");
+        $this->load->model("articleModel");
         $query = $this->articleModel->deletearticles($param);
-        redirect(base_url().'Admin/direktoriarticle'); 
+        redirect(base_url() . 'Admin/direktoriarticle');
     }
-    
 
     public function updateProgram() {
         if (!$this->auth()) {
