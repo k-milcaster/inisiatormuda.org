@@ -70,11 +70,12 @@ class Admin extends CI_Controller {
 
             $pieces = explode("</h1>", $teks);
             $title = $pieces[0];
-            $title = $title.'</h1>';
-            if ($pieces[0] == "") {
+            $title = $title . '</h1>';
+            if ($pieces[0] == '') {
                 $pieces = explode("</h2>", $teks);
                 $title = '';
-                $title = $pieces[0] . '</h2>';
+                $title = $pieces[0];
+                $title = $title . '</h2>';
                 if ($pieces[0] == "") {
                     $pieces = explode("</h3>", $teks);
                     $title = '';
@@ -99,21 +100,19 @@ class Admin extends CI_Controller {
 
 
             $dateTime = date('Y-m-d H:i:s');
-            
-            if($newcategory == ''){
-            $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);    
+
+            if ($newcategory == '') {
+                $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
+            } else {
+                $this->articleModel->insertnewcat($newcategory);
+                $paramater = $this->articleModel->getidcat($newcategory);
+                foreach ($paramater->result_array() as $row) {
+                    $getid = $row['id_category'];
+                }
+
+                $this->articleModel->insertarticle($getid, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
             }
-            else{
-            $this->articleModel->insertnewcat($newcategory);    
-            $paramater = $this->articleModel->getidcat($newcategory);    
-            foreach ($paramater->result_array() as $row) {
-                 $getid = $row['id_category'];
-            }
-            
-            $this->articleModel->insertarticle($getid, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);    
-                
-            }
-            
+
             redirect(base_url() . "admin/direktoriarticle");
         }
     }
@@ -387,9 +386,9 @@ class Admin extends CI_Controller {
                     $articlescut = $articlescut . '</p><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '" class="btn">PUBLISHED</a>';
                 }
                 if ($row['recommended'] == 1) {
-                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">RECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '/' . $row['title'] . '/' . $row['content'] . '/' . $row['id_category'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
+                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">RECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
                 } else {
-                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">UNRECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '/' . $row['title'] . '/' . $row['content'] . '/' . $row['id_category'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
+                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">UNRECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
                 }
 
                 $a = $i % 2;
@@ -410,13 +409,121 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function editarticle($param, $param2, $param3, $param4) {
+    public function editarticle($param) {
+        
+        
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'articles',
+        );
+            
+        }
+        
         $this->load->database();
         $this->load->model("articleModel");
+        $query = $this->articleModel->getarticlesid($param);
+        $setcat1 = '';
+        $setcat2 = '';
+        $idcategory = '';
+        foreach ($query->result_array() as $row) {
+            $setcat1 = $setcat1 . $row['title'] . $row['content'];
+            $idcategory = $row['id_category'];
+            
+        }
+        $this->session->set_flashdata('contentedit', $setcat1);
 
-//1-4
+        $querycategory = $this->articleModel->getcategorybyid($idcategory);
+
+        foreach ($querycategory->result_array() as $row) {
+            $setcat2 = $setcat2 . '<select name = "listcategory"; class="form-control">
+                                <option value = "' . $row['id_category'] . '">' . $row['category'] . '</option>';
+
+            }
+
+
+        $querycategory = $this->articleModel->getCategory();
+        
+        foreach ($querycategory->result_array() as $row) {
+            $setcat2 = $setcat2 . '
+                                <option value = "' . $row['id_category'] . '">' . $row['category'] . '</option>';
+        }
+        $setcat2 = $setcat2 . '</select>';
+        $this->session->set_flashdata('categoryedit', $setcat2);
+        $this->session->set_flashdata('idart', $param);
+
+
+        $this->load->view('headeradmin', $header);
+        $this->load->view('admartedit');
+        $this->load->view('footer');
+
+
+
+
+
 //        $query = $this->articleModel->editarticle($param);
-        redirect(base_url() . 'Admin/direktoriarticle');
+//        redirect(base_url() . 'Admin/direktoriarticle');
+    }
+    
+    
+    public function edit($param) {
+         $newcategory = '';
+        $teks = $this->input->post('teks');
+        $category = $this->input->post('listcategory');
+        $newcategory = $this->input->post('categorys');
+        if ($teks == '' || $category == '') {
+            redirect(base_url() . "Admin/direktoriarticle");
+        } else {
+            $this->load->model('articleModel');
+
+            $pieces = explode("</h1>", $teks);
+            $title = $pieces[0];
+            $title = $title . '</h1>';
+            if ($pieces[0] == '') {
+                $pieces = explode("</h2>", $teks);
+                $title = '';
+                $title = $pieces[0];
+                $title = $title . '</h2>';
+                if ($pieces[0] == "") {
+                    $pieces = explode("</h3>", $teks);
+                    $title = '';
+                    $title = $pieces[0] . '</h3>';
+                    if ($pieces[0] == "") {
+                        $pieces = explode("</h4>", $teks);
+                        $title = '';
+                        $title = $pieces[0] . '</h4>';
+                        if ($pieces[0] == "") {
+                            $pieces = explode("</h5>", $teks);
+                            $title = '';
+                            $title = $pieces[0] . '</h5>';
+                            if ($pieces[0] == "") {
+                                $pieces = explode("</h6>", $teks);
+                                $title = '';
+                                $title = $pieces[0] . '</h6>';
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            $dateTime = date('Y-m-d H:i:s');
+
+            if ($newcategory == '') {
+                $this->articleModel->editarticle($param,$category, $title, $pieces[1]);
+            } else {
+                $this->articleModel->insertnewcat($newcategory);
+                $paramater = $this->articleModel->getidcat($newcategory);
+                foreach ($paramater->result_array() as $row) {
+                    $getid = $row['id_category'];
+                }
+
+                $this->articleModel->editarticle($param,$getid, $title, $pieces[1]);
+            }
+
+            redirect(base_url() . "admin/direktoriarticle");
+        }
     }
 
     public function updatepublished($param, $param2) {

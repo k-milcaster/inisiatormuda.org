@@ -42,9 +42,10 @@ class Blog extends CI_Controller {
 
     public function loadlistarticle() {
         $this->load->model("articleModel");
-        $querycategory = $this->articleModel->getarticles();
-        $setcat = '';
+        $querycategory = $this->articleModel->getarticlespengunjung();
+//        $setcat ='';
         $setcat ='';
+        $i=0;
         foreach ($querycategory->result_array() as $row) {
             $setcat=$setcat.' <div class="grid_12">
             <h3 class="pb1"><span>'.$row['title'].'</span></h3>
@@ -55,7 +56,25 @@ class Blog extends CI_Controller {
             </div>
             
         </div>';
+            $i++;
             }
+            
+           if($i==0){
+               $setcat=$setcat.' <div class="grid_12">
+            <h3 class="pb1"><span>BELUM ADA ARTIKEL</span></h3>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>';
+           }
         $this->session->set_flashdata('setartpengunjung', $setcat);
 
 

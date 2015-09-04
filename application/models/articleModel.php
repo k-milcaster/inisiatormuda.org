@@ -11,7 +11,12 @@ class articleModel extends CI_Model {
         $query = $this->db->query("SELECT * FROM category");
         return $query;
     }
-    
+    public function getcategorybyid($param){
+        $query = $this->db->query("SELECT * FROM category WHERE id_category = ".$param);
+        return $query;
+    }
+
+
     public function insertarticle($param1, $param2,$param3,$param4,$param5) {
         $new_article = array(
        'id_article' => null,
@@ -33,10 +38,16 @@ class articleModel extends CI_Model {
         
     }
     
-    public function editarticle($param) {
-        
+    public function editarticle($param,$param1,$param2,$param3) {
+//        UPDATE `article` SET `id_article`=[value-1],`id_category`=[value-2],`title`=[value-3],`content`=[value-4],`postdate`=[value-5],`published`=[value-6],`recommended`=[value-7],`user_id_user`=[value-8] WHERE 1
+        $query = $this->db->query("UPDATE `article` SET `id_category`='".$param1."',`title`='".$param2."',`content`='".$param3."' WHERE id_article = ".$param);
+        return $query;
     }
 
+    public function getarticlespengunjung() {
+        $query = $this->db->query("SELECT * FROM article WHERE published = 1 ORDER BY  `article`.`postdate` DESC ");
+        return $query;
+    }
     public function getarticles() {
         $query = $this->db->query("SELECT * FROM article ORDER BY  `article`.`postdate` DESC ");
         return $query;
@@ -93,8 +104,6 @@ class articleModel extends CI_Model {
         return $query;
     }
     
-    public function getarticlesbyid() {
-        
-    }
+  
     
 }
