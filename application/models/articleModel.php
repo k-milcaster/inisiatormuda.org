@@ -38,10 +38,33 @@ class articleModel extends CI_Model {
     }
 
     public function getarticles() {
-        $query = $this->db->query("SELECT * FROM article");
+        $query = $this->db->query("SELECT * FROM article ORDER BY  `article`.`postdate` DESC ");
         return $query;
     }
     
+    public function getarticlesid($param){
+        $query = $this->db->query("SELECT * FROM article WHERE  id_article =".$param);
+        return $query;
+    }
+    
+    public function insertnewcat($param) {
+       $new_cat = array(
+       
+       'id_category' => null,
+       'category' => $param
+       
+               
+      );
+      
+       $query =  $this->db->insert('category',$new_cat);    
+    } 
+    
+    public function getidcat($param){
+        
+     $query = $this->db->query("SELECT id_category FROM category WHERE  category ='".$param."'");
+        return $query;
+    }
+
     public function updatepublished($param,$param2) {
         if($param2==0){
             $query = $this->db->query("UPDATE  article SET  published =  1 WHERE  id_article =".$param);

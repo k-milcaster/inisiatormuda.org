@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/admprograms.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/controllers/Admin.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/program.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/admupdprogram.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/public/css/style.css</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/controllers/Program.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/public/css/hover.css</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/models/programsModel.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admarticles.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/listartikelpengunjung.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Blog.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/articleModel.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Article.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Admin.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/artikelpengunjung.php</file>
         </group>
     </open-files>
 </project-private>

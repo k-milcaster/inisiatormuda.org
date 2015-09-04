@@ -59,15 +59,18 @@ class Admin extends CI_Controller {
     }
 
     public function posting() {
+        $newcategory = '';
         $teks = $this->input->post('teks');
         $category = $this->input->post('listcategory');
+        $newcategory = $this->input->post('categorys');
         if ($teks == '' || $category == '') {
             redirect(base_url() . "Admin/articles");
         } else {
             $this->load->model('articleModel');
 
             $pieces = explode("</h1>", $teks);
-            $title = $pieces[0] . '</h1>';
+            $title = $pieces[0];
+            $title = $title.'</h1>';
             if ($pieces[0] == "") {
                 $pieces = explode("</h2>", $teks);
                 $title = '';
@@ -96,8 +99,22 @@ class Admin extends CI_Controller {
 
 
             $dateTime = date('Y-m-d H:i:s');
-            $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
-            redirect(base_url() . "admin/articles");
+            
+            if($newcategory == ''){
+            $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);    
+            }
+            else{
+            $this->articleModel->insertnewcat($newcategory);    
+            $paramater = $this->articleModel->getidcat($newcategory);    
+            foreach ($paramater->result_array() as $row) {
+                 $getid = $row['id_category'];
+            }
+            
+            $this->articleModel->insertarticle($getid, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);    
+                
+            }
+            
+            redirect(base_url() . "admin/direktoriarticle");
         }
     }
 
@@ -362,7 +379,7 @@ class Admin extends CI_Controller {
 
             foreach ($querycategory->result_array() as $row) {
                 $title = '<h3><span>' . $row['title'] . '</span></h3>';
-                $articlescut = '<p class="col3">' . substr($row['content'], 5, 45) . '...';
+                $articlescut = '<p class="col3">' . substr($row['content'], 0, 45) . '...';
 
                 if ($row['published'] == 0) {
                     $articlescut = $articlescut . '</p><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '" class="btn">PUBLISH</a>';
