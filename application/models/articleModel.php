@@ -6,7 +6,10 @@ class articleModel extends CI_Model {
         // Call the CI_Model constructor
         parent::__construct();
     }
-
+public function getArticleList() {
+        $query = $query = $this->db->get('article');
+        return $query;
+    }
     public function getCategory() {
         $query = $this->db->query("SELECT * FROM category");
         return $query;
