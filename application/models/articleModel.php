@@ -15,6 +15,11 @@ class articleModel extends CI_Model {
         $query = $this->db->query("SELECT * FROM category WHERE id_category = ".$param);
         return $query;
     }
+    
+    public function getusername($param) {
+        $query = $this->db->query("SELECT username FROM user WHERE id_user = ".$param);
+        return $query;
+    }
 
 
     public function insertarticle($param1, $param2,$param3,$param4,$param5) {

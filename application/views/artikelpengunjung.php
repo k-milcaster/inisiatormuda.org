@@ -14,8 +14,12 @@
         <div class="logos">
             <div class="grid_12"><a href="#"><img src="<?php echo base_url(); ?>public/images/page4_img3.jpg" alt=""></a></div>
             </div>
-        <div class="grid_12">
-           
+        <div class="grid_12" >
+            <span><?php
+                    $c = $this->session->flashdata('datepengunjung');
+
+                    echo $c;
+                    ?></span>
             <p class="col3"><div>
                 
                 <?php
@@ -31,6 +35,6 @@
          <br>
             <br>
             
-            <a href="<?php echo base_url(); ?>Article" class="btn">BACK</a>
+            <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
     </div>
 </div>
