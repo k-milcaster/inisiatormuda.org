@@ -57,8 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li <?php if ($title == "About") echo 'class="current"'; ?>>
                                     <a href="<?php echo base_url() ?>about">About Us</a>
                                     <ul>
-                                        <li><a href="#">Greetings from Executive Director</a></li>
-                                        <li><a href="#">Board of Advisors</a></li>
+                                        <li><a href="<?php echo base_url(); ?>about/greetings">Greetings from Executive Director</a></li>
+                                        <li><a href="<?php echo base_url(); ?>about/advisor">Board of Advisors</a></li>
                                         <li><a href="#">Board of Directors</a></li>
                                         <li><a href="<?php echo base_url(); ?>about/initiator">Initiators</a></li>
                                     </ul>

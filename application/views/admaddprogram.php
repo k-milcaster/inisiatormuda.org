@@ -11,8 +11,8 @@
                         <span class="empty error-empty">*This field is required.</span> </label>
                     <label class="name">                        
                         <input class="form-control datepicker" placeholder="Date:" data-date-format="yyyy-mm-dd" type="text" name="progdate" >
-                        
-                        </label>
+
+                    </label>
                     <label class="name">
                         <input type="text" name="progloc" placeholder="Location:" class="field">
                         <br class="clear">

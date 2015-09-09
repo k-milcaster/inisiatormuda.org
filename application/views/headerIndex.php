@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <script src="<?php echo base_url(); ?>public/js/jquery.equalheights.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery.easing.1.3.js"></script>
         <script src="<?php echo base_url(); ?>public/js/camera.js"></script>
-        
+
         <!--[if (gt IE 9)|!(IE)]><!-->
         <script src="<?php echo base_url(); ?>public/js/jquery.mobile.customized.min.js"></script>
         <!--<![endif]-->
@@ -67,8 +67,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li <?php if ($title == "About") echo 'class="current"'; ?>>
                                     <a href="<?php echo base_url() ?>about">About Us</a>
                                     <ul>
-                                        <li><a href="#">Greetings from Executive Director</a></li>
-                                        <li><a href="#">Board of Advisors</a></li>
+                                        <li><a href="<?php echo base_url(); ?>about/greetings">Greetings from Executive Director</a></li>
+                                        <li><a href="<?php echo base_url(); ?>about/advisor">Board of Advisors</a></li>
                                         <li><a href="#">Board of Directors</a></li>
                                         <li><a href="<?php echo base_url(); ?>about/initiator">Initiators</a></li>
                                     </ul>
