@@ -139,6 +139,48 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function addInitiators() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'staffs',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admaddstaffs');
+            $this->load->view('footer');
+        }
+    }
+
+    public function doAddInitiators() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            
+        }
+    }
+
+    public function updateInitiators() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'staffs',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admupdstaffs');
+            $this->load->view('footer');
+        }
+    }
+
+    public function doDeleteInitiators() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            
+        }
+    }
+
     public function users() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
@@ -410,17 +452,16 @@ class Admin extends CI_Controller {
     }
 
     public function editarticle($param) {
-        
-        
+
+
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
             $header = array(
                 'title' => 'articles',
-        );
-            
+            );
         }
-        
+
         $this->load->database();
         $this->load->model("articleModel");
         $query = $this->articleModel->getarticlesid($param);
@@ -430,7 +471,6 @@ class Admin extends CI_Controller {
         foreach ($query->result_array() as $row) {
             $setcat1 = $setcat1 . $row['title'] . $row['content'];
             $idcategory = $row['id_category'];
-            
         }
         $this->session->set_flashdata('contentedit', $setcat1);
 
@@ -439,12 +479,11 @@ class Admin extends CI_Controller {
         foreach ($querycategory->result_array() as $row) {
             $setcat2 = $setcat2 . '<select name = "listcategory"; class="form-control">
                                 <option value = "' . $row['id_category'] . '">' . $row['category'] . '</option>';
-
-            }
+        }
 
 
         $querycategory = $this->articleModel->getCategory();
-        
+
         foreach ($querycategory->result_array() as $row) {
             $setcat2 = $setcat2 . '
                                 <option value = "' . $row['id_category'] . '">' . $row['category'] . '</option>';
@@ -465,10 +504,9 @@ class Admin extends CI_Controller {
 //        $query = $this->articleModel->editarticle($param);
 //        redirect(base_url() . 'Admin/direktoriarticle');
     }
-    
-    
+
     public function edit($param) {
-         $newcategory = '';
+        $newcategory = '';
         $teks = $this->input->post('teks');
         $category = $this->input->post('listcategory');
         $newcategory = $this->input->post('categorys');
@@ -511,7 +549,7 @@ class Admin extends CI_Controller {
             $dateTime = date('Y-m-d H:i:s');
 
             if ($newcategory == '') {
-                $this->articleModel->editarticle($param,$category, $title, $pieces[1]);
+                $this->articleModel->editarticle($param, $category, $title, $pieces[1]);
             } else {
                 $this->articleModel->insertnewcat($newcategory);
                 $paramater = $this->articleModel->getidcat($newcategory);
@@ -519,7 +557,7 @@ class Admin extends CI_Controller {
                     $getid = $row['id_category'];
                 }
 
-                $this->articleModel->editarticle($param,$getid, $title, $pieces[1]);
+                $this->articleModel->editarticle($param, $getid, $title, $pieces[1]);
             }
 
             redirect(base_url() . "admin/direktoriarticle");
