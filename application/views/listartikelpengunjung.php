@@ -19,19 +19,20 @@
             <img src="' . base_url() . 'public/images/page4_img1.jpg" alt="" class="img_inner fleft">
             <div class="extra_wrapper">
                 <p>By : ' . $setuser . '<br>' . '<span>  Date : ' . substr($row->postdate, 0, 10) . '</span>' . substr($row->content, 0, 250) . '...<a href="' . base_url() . 'Blog/isiartikel/' . $row->id_article . '" class="btn" style="margin-left: 110px">MORE</a></p>
-                  
-            </div>
+            </div>      
             
         </div>';
             }
 
-            if ($count == 5) {
+            if ($count == 4) {
                 
                 $flag++;
                 $count = 0;
             }
         }
         ?>
+
+    </div>
 
 <section>
             <?php
@@ -54,6 +55,6 @@
             }
             ?>
         </section>    
-    </div>
+
 </div>
 

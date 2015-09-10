@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/listartikelpengunjung.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Blog.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/articleModel.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Program.php</file>
-            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/program.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/career.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Career.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/direktoriarticle.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admaddprogram.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Admin.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admcareers.php</file>
         </group>
     </open-files>
 </project-private>

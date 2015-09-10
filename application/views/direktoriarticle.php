@@ -1,31 +1,71 @@
 <body  class="">
         <div class="content"><div class="ic"></div>
     <div class="container_12">
-        <div class="grid_6">
-            <a href="<?php base_url()?>articles " class="btn">BUAT ARTIKEL</a>
-            <?php
-                                    $a = $this->session->flashdata('left');
+        
+        
+        <a href="<?php base_url()?>articles " class="btn">BUAT ARTIKEL</a>
 
-                                    echo $a;
-                                    ?>
-            
-            
-        </div>
-        <div class="grid_6" style="">
-            <br>
-            <br>
-            <br>
-            <br>
+        
+        <h2>ARTICLE ORGANIZER</h2>
+        <br>
+        <h5>Recomended Di batasi untuk 4 artikel saja</h5>
+        <br>
+        <div class="clear"></div>
+                    <?php
+                    if (isset($errs)) {
+                        echo '<h5>' . $err . '</h5>';
+                    }
+                    ?>
+        <table>
+                <thead>
+                    <tr><th>NO</th>
+                        <th>DATE</th>
+                        <th>TITLE</th>
+                        <th>ARTICLE</th>
+                        <th>UPDATE ART</th>
+                        <th>DELETE ART</th>
+                        <th>RECOMMEND</th><th>PUBLISH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    
             <?php
-                                    $b = $this->session->flashdata('right');
+                                    $table = $this->session->flashdata('tableart');
 
-                                    echo $b;
+                                    echo $table;
                                     ?>
-            
-            
-            
-            
-        </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </tbody>
+        
+        </table>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      
 
     </div>
 </div>

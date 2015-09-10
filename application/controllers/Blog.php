@@ -25,7 +25,7 @@ class Blog extends CI_Controller {
                             'title' => 'Blog',
                         );
                         $this->load->model('articleModel');
-                        $article = $this->articleModel->getArticleList();
+                        $article = $this->articleModel->getarticlespengunjung();
                         if ($article->num_rows() == 0) {
                             $this->load->view('header', $header);
                             $this->load->view('maintenance');
@@ -34,8 +34,8 @@ class Blog extends CI_Controller {
 //                        $pagecount = (int) ($article->num_rows() / 6);
                         else if ($article->num_rows() != 0) {
 
-                            $pagecount = (int) ($article->num_rows() / 5);
-                            if ($article->num_rows() % 5 != 0) {
+                            $pagecount = (int) ($article->num_rows() / 4);
+                            if ($article->num_rows() % 4 != 0) {
                                 $pagecount++;
                             }
 
@@ -82,18 +82,18 @@ class Blog extends CI_Controller {
                     $this->load->view('maintenance');
                 } else {
                     $this->load->model('articleModel');
-                    $article = $this->articleModel->getArticleList();
+                    $article = $this->articleModel->getarticlespengunjung();
 //                    $this->load->model('programsmodel');
 //                    $programs = $this->programsmodel->getList();
-                    $pagecount = (int) ($article->num_rows() / 5);
-                    if ($pagecount % 5 != 0) {
+                    $pagecount = (int) ($article->num_rows() / 4);
+                    if ($pagecount % 4 != 0) {
                         $pagecount++;
                     }
                     if ($page > $pagecount) {
-                        redirect(base_url() . "program/page/" . $pagecount);
+                        redirect(base_url() . "Blog/page/" . $pagecount);
                     }
                     $header = array(
-                        'title' => 'Programs',
+                        'title' => 'Blogs',
                     );
                     $content = array(
                         'pagecount' => $pagecount,
