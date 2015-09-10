@@ -63,41 +63,19 @@ class Admin extends CI_Controller {
         $teks = $this->input->post('teks');
         $category = $this->input->post('listcategory');
         $newcategory = $this->input->post('categorys');
-        if ($teks == '' || $category == '') {
+        if ($newcategory == '' && $category == 0) {
             redirect(base_url() . "Admin/articles");
-        } else {
+        } 
+        else if($teks == ''){
+            redirect(base_url() . "Admin/articles");
+        }
+        else {
             $this->load->model('articleModel');
 
             $pieces = explode("</h1>", $teks);
             $title = $pieces[0];
             $title = $title . '</h1>';
-            if ($pieces[0] == '') {
-                $pieces = explode("</h2>", $teks);
-                $title = '';
-                $title = $pieces[0];
-                $title = $title . '</h2>';
-                if ($pieces[0] == "") {
-                    $pieces = explode("</h3>", $teks);
-                    $title = '';
-                    $title = $pieces[0] . '</h3>';
-                    if ($pieces[0] == "") {
-                        $pieces = explode("</h4>", $teks);
-                        $title = '';
-                        $title = $pieces[0] . '</h4>';
-                        if ($pieces[0] == "") {
-                            $pieces = explode("</h5>", $teks);
-                            $title = '';
-                            $title = $pieces[0] . '</h5>';
-                            if ($pieces[0] == "") {
-                                $pieces = explode("</h6>", $teks);
-                                $title = '';
-                                $title = $pieces[0] . '</h6>';
-                            }
-                        }
-                    }
-                }
-            }
-
+            
 
             $dateTime = date('Y-m-d H:i:s');
 
@@ -415,41 +393,42 @@ class Admin extends CI_Controller {
 
             $this->load->model("articleModel");
             $querycategory = $this->articleModel->getarticles();
-            $right = '';
-            $left = '';
-            $title = '';
             $articlescut = '';
-            $i = 0;
+            $newtable = '';
+            $counter = 0;
+            $errs = '';
+            $i=1;
 
             foreach ($querycategory->result_array() as $row) {
-                $title = '<h3><span>' . $row['title'] . '</span></h3>';
-                $articlescut = '<p class="col3">' . substr($row['content'], 0, 45) . '...';
 
+                $rest = substr($row['title'], 4, -5);  // returns "abcde"
+                $newtable = $newtable . '<tr><td class="user-name">' . $i . '</td><td class="user-name">' . $row['postdate'] . '</td><td class="user-name">' . $rest . '</td><td class="user-name">' . substr($row['content'], 0, 9) . '...</td>';
                 if ($row['published'] == 0) {
-                    $articlescut = $articlescut . '</p><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '" class="btn">PUBLISH</a>';
+                    $newtable = $newtable . ' <td class="user-name"><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '"><div class="btn-red">Update </td><td class="user-name"><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '"><div class="btn-red">Delete</div></a></td><td class="user-name"><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '"><div class="btn-red">PUBLISH </td>';
                 } else {
-                    $articlescut = $articlescut . '</p><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '" class="btn">PUBLISHED</a>';
+                    $newtable = $newtable . ' <td class="user-name"><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '"><div class="btn-red">Update </td><td class="user-name"><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '"><div class="btn-red">Delete</div></a></td><td class="user-name"><a href="' . base_url() . 'Admin/updatepublished/' . $row['id_article'] . '/' . $row['published'] . '"><div class="btn-red">PUBLISHED </td>';
                 }
                 if ($row['recommended'] == 1) {
-                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">RECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
+                    $counter++;
+                    if ($counter != 5) {
+                        $newtable = $newtable . '<td class="user-name"><a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '"><div class="btn-red">RECOMMENDED</div></a></td></tr>';
+                    } else {
+                        $newtable = $newtable . '<td class="user-name"><a href=""><div class="btn-red">UNRECOMMENDED</div></a></td></tr>';
+                    }
                 } else {
-                    $articlescut = $articlescut . '<a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '" class="btn">UNRECOMMENDED</a><a href="' . base_url() . 'Admin/editarticle/' . $row['id_article'] . '" class="btn">EDIT</a><a href="' . base_url() . 'Admin/deletearticle/' . $row['id_article'] . '" class="btn">DELETE</a>';
-                }
-
-                $a = $i % 2;
-                if ($a == 0) {
-                    $left = $left . $title . $articlescut;
-                } else {
-                    $right = $right . $title . $articlescut;
+                    $newtable = $newtable . '<td class="user-name"><a href="' . base_url() . 'Admin/updaterecommended/' . $row['id_article'] . '/' . $row['recommended'] . '"><div class="btn-red">UNRECOMMEND</div></a></td></tr>';
                 }
                 $i++;
             }
-            $this->session->set_flashdata('right', $right);
-            $this->session->set_flashdata('left', $left);
-
+            if ($counter == 5) {
+                $counter = 0;
+                $errs = 'Recommend Hanya untuk 4 Artikel';
+                //redirect(base_url() . "Admin/Direktoriarticle");
+            }
+            $this->session->set_flashdata('tableart', $newtable);
 
             $this->load->view('headeradmin', $header);
-            $this->load->view('direktoriarticle');
+            $this->load->view('direktoriarticle', $errs);
             $this->load->view('footer');
         }
     }
@@ -768,4 +747,10 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function isihalamancareer($param) {
+        
+    }
+    
+    
+    
 }

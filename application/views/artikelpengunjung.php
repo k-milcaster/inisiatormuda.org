@@ -31,10 +31,21 @@
 
             </div></p>
 
+<<<<<<< HEAD
         </div>
         <br>
         <br>
 
+=======
+
+        </div>
+        <br>
+        <br>
+        
+            <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/page4_img3.jpg" alt=""></a></div>
+            <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/page4_img3.jpg" alt=""></a></div>
+        
+>>>>>>> origin/master
         <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
     </div>
 </div>
