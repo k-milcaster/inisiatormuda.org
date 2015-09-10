@@ -177,7 +177,10 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            
+            $id = $this->uri->segment(3);
+            $this->load->model('staffsmodel');
+            $this->usersmodel->deleteStaff($id);
+            redirect(base_url() . "admin/staffs");
         }
     }
 
