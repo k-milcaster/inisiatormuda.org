@@ -65,17 +65,15 @@ class Admin extends CI_Controller {
         $newcategory = $this->input->post('categorys');
         if ($newcategory == '' && $category == 0) {
             redirect(base_url() . "Admin/articles");
-        } 
-        else if($teks == ''){
+        } else if ($teks == '') {
             redirect(base_url() . "Admin/articles");
-        }
-        else {
+        } else {
             $this->load->model('articleModel');
 
             $pieces = explode("</h1>", $teks);
             $title = $pieces[0];
             $title = $title . '</h1>';
-            
+
 
             $dateTime = date('Y-m-d H:i:s');
 
@@ -108,16 +106,21 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
+            $this->load->model('staffsmodel');
+            $init = $this->staffsmodel->getStaffsList();
+            $content = array(
+                'init' => $init,
+            );
             $header = array(
                 'title' => 'staffs',
             );
             $this->load->view('headeradmin', $header);
-            $this->load->view('admstaffs');
+            $this->load->view('admstaffs', $content);
             $this->load->view('footer');
         }
     }
 
-    public function addInitiators() {
+    public function addInitiator() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
@@ -130,34 +133,136 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function doAddInitiators() {
+    public function doAddInitiator() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('name', 'Progname', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('bio', 'Progloc', 'trim|required|min_length[4]|max_length[600]');
+
+            if ($this->form_validation->run() == FALSE) {
+                $header = array(
+                    'title' => 'staffs',
+                );
+                $content = array(
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                );
+
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admaddstaffs', $content);
+                $this->load->view('footer');
+            } else {
+                $dateposted = date('YmdHis');
+                $id = $dateposted;
+                $name = $this->input->post('name');
+                $bio = $this->input->post('bio');
+
+                $new_name = 'init' . $id; //renaming
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = 'public/images/aboutus/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size'] = '2000';
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $header = array(
+                        'title' => 'staffs',
+                    );
+                    $upload_error = array('err' => $this->upload->display_errors());
+                    $this->load->view('headeradmin', $header);
+                    $this->load->view('admaddstaffs', $upload_error);
+                    $this->load->view('footer');
+                } else {
+                    $upload_data = $this->upload->data();
+                    $this->load->model('staffsmodel');
+                    $this->staffsmodel->addStaff($name, $bio, $upload_data['file_name']);
+                    redirect(base_url() . "admin/staffs");
+                }
+            }
         }
     }
 
-    public function updateInitiators() {
-        if (!$this->auth()) {
-            redirect(base_url() . "admin");
-        } else {
-            $header = array(
-                'title' => 'staffs',
-            );
-            $this->load->view('headeradmin', $header);
-            $this->load->view('admupdstaffs');
-            $this->load->view('footer');
-        }
-    }
-
-    public function doDeleteInitiators() {
+    public function updateInitiator() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
             $id = $this->uri->segment(3);
             $this->load->model('staffsmodel');
-            $this->usersmodel->deleteStaff($id);
+            $init = $this->staffsmodel->getStaff($id);
+            $content = array(
+                'init' => $init,
+            );
+            $header = array(
+                'title' => 'staffs',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admupdstaffs', $content);
+            $this->load->view('footer');
+        }
+    }
+
+    public function doUpdateInitiator() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('name', 'Progname', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('bio', 'Progloc', 'trim|required|min_length[4]|max_length[600]');
+            
+            if ($this->form_validation->run() == FALSE) {
+                $header = array(
+                    'title' => 'staffs',
+                );
+                $content = array(
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                );
+
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admupdstaffs', $content);
+                $this->load->view('footer');
+            } else {
+
+                $id = $this->input->post('id');
+                $name = $this->input->post('name');                                
+                $bio = $this->input->post('bio');
+                $oriimg = $this->input->post('img');
+
+                $new_name = 'img' . $id;
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = 'public/images/programs/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['overwrite'] = 'TRUE';
+                $config['max_size'] = '2000';
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $this->load->model('staffsmodel');
+                    $this->staffsmodel->updateStaff($id, $name, $bio, $oriimg);
+                    redirect(base_url() . "admin/staffs");
+                } else {
+                    $upload_data = $this->upload->data();
+                    $this->load->model('staffsmodel');
+                    $this->staffsmodel->updateStaff($id, $name, $bio, $upload_data['file_name']);
+                    redirect(base_url() . "admin/staffs");
+                }
+            }
+        }
+    }
+
+    public function doDeleteInitiator() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $id = $this->uri->segment(3);
+            $this->load->model('staffsmodel');
+            $this->staffsmodel->deleteStaff($id);
             redirect(base_url() . "admin/staffs");
         }
     }
@@ -397,7 +502,7 @@ class Admin extends CI_Controller {
             $newtable = '';
             $counter = 0;
             $errs = '';
-            $i=1;
+            $i = 1;
 
             foreach ($querycategory->result_array() as $row) {
 
@@ -750,7 +855,5 @@ class Admin extends CI_Controller {
     public function isihalamancareer($param) {
         
     }
-    
-    
-    
+
 }

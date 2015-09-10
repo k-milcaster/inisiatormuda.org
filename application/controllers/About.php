@@ -13,11 +13,16 @@ class About extends CI_Controller {
                 if ($row->status === '1' || $row2->status === '1') {
                     $this->load->view('maintenance');
                 } else {
+                    $this->load->model('staffsmodel');
+                    $init = $this->staffsmodel->getStaffsList();
+                    $content = array(
+                        'init' => $init,
+                    );
                     $header = array(
                         'title' => 'About',
                     );
                     $this->load->view('header', $header);
-                    $this->load->view('about');
+                    $this->load->view('about', $content);
                     $this->load->view('footer');
                 }
             }
@@ -53,11 +58,16 @@ class About extends CI_Controller {
                 if ($row->status === '1' || $row2->status === '1') {
                     $this->load->view('maintenance');
                 } else {
+                    $this->load->model('staffsmodel');
+                    $init = $this->staffsmodel->getStaffsList();
+                    $content = array(
+                        'init' => $init,
+                    );
                     $header = array(
                         'title' => 'About',
                     );
                     $this->load->view('header', $header);
-                    $this->load->view('initiator');
+                    $this->load->view('initiator', $content);
                     $this->load->view('footer');
                 }
             }
