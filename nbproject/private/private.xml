@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/controllers/Admin.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/director.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/controllers/About.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/admprograms.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/admaddprogram.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/admadduser.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/admstaffs.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/initiator.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/models/programsModel.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/greetings.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/models/staffsModel.php</file>
-            <file>file:/C:/Program%20Files%20(x86)/EasyPHP-DevServer-14.1VC11/data/localweb/inisiatormuda.org/application/views/advisors.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/career.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admpagecareer.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Career.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/articleModel.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/models/careerModel.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/controllers/Admin.php</file>
+            <file>file:/C:/xampp/htdocs/inisiatormuda.org/application/views/admcareers.php</file>
         </group>
     </open-files>
 </project-private>

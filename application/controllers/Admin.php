@@ -214,7 +214,7 @@ class Admin extends CI_Controller {
 
             $this->form_validation->set_rules('name', 'Progname', 'trim|required|min_length[2]|max_length[45]');
             $this->form_validation->set_rules('bio', 'Progloc', 'trim|required|min_length[4]|max_length[600]');
-            
+
             if ($this->form_validation->run() == FALSE) {
                 $header = array(
                     'title' => 'staffs',
@@ -229,7 +229,7 @@ class Admin extends CI_Controller {
             } else {
 
                 $id = $this->input->post('id');
-                $name = $this->input->post('name');                                
+                $name = $this->input->post('name');
                 $bio = $this->input->post('bio');
                 $oriimg = $this->input->post('img');
 
@@ -394,6 +394,26 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'careers',
             );
+            
+            $this->load->model('careerModel');
+            $querycategory = $this->careerModel->getCareer();
+            $setcareer = '';
+            $setidcareer = 0;
+            $setcareer = $setcareer . '<div class="grid_12">
+            <p class="text1 col1">
+
+            ';
+            foreach ($querycategory->result_array() as $row) {
+                $setcareer = $setcareer . $row['title'] . '</p>
+            <div class="clear"></div>
+            <div class="clear"></div><p class="col3">' . $row['datetime'] . '</p>
+            ' . $row['content'] . '
+        </div>';
+                $setidcareer = $row['id_career'];
+            }
+            $this->session->set_flashdata('setcareer', $setcareer);
+            $this->session->set_flashdata('setidcareer', $setidcareer);
+
             $this->load->view('headeradmin', $header);
             $this->load->view('admcareers');
             $this->load->view('footer');
@@ -852,8 +872,43 @@ class Admin extends CI_Controller {
         }
     }
 
-    public function isihalamancareer($param) {
-        
+    public function isihalamancareer() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'careers',
+            );
+            
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admpagecareer');
+            $this->load->view('footer');
+        }
+    }
+
+    public function postingcareer() {
+        $teks = $this->input->post('teks');
+        if ($teks == '') {
+            redirect(base_url() . "Admin/articles");
+        } else {
+            $this->load->model('careerModel');
+
+            $pieces = explode("</h1>", $teks);
+            
+            $title = $pieces[0];
+            $title=substr($title, 4);
+            $title = $title;
+
+
+            $dateTime = date('Y-m-d H:i:s');
+
+            $this->careerModel->deletecareer();
+            $this->careerModel->insertcareer($title, $pieces[1], $dateTime, $this->session->userdata('id_user'));
+
+
+
+            redirect(base_url() . "admin/careers");
+        }
     }
 
 }
