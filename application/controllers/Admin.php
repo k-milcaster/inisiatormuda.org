@@ -399,20 +399,19 @@ class Admin extends CI_Controller {
             $querycategory = $this->careerModel->getCareer();
             $setcareer = '';
             $setidcareer = 0;
-            $setcareer = $setcareer . '<div class="grid_12">
-            <p class="text1 col1">
-
-            ';
+            $setcontentcareer = '';
+            $settanggal='';
+            
             foreach ($querycategory->result_array() as $row) {
-                $setcareer = $setcareer . $row['title'] . '</p>
-            <div class="clear"></div>
-            <div class="clear"></div><p class="col3">' . $row['datetime'] . '</p>
-            ' . $row['content'] . '
-        </div>';
+                $setcareer = $row['title'];
                 $setidcareer = $row['id_career'];
+                $setcontentcareer = $row ['content'];
+                $settanggal = $row['datetime'];
             }
             $this->session->set_flashdata('setcareer', $setcareer);
-            $this->session->set_flashdata('setidcareer', $setidcareer);
+            $this->session->set_flashdata('setcontent', $setcontentcareer);
+            $this->session->set_flashdata('settanggalcareer', $settanggal);
+            
 
             $this->load->view('headeradmin', $header);
             $this->load->view('admcareers');

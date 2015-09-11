@@ -1,19 +1,38 @@
 <div class="content"><div class="ic"></div>
     <div class="container_12">
 
+        <div class="clear"></div>
+
         <div class="grid_12">
-            <h3><span>Career</span></h3>
+            <h3><span><?php
+                    $b = $this->session->flashdata('setcareer');
+
+                    echo $b;
+                    ?></span></h3>
         </div>
+        <div class="clear"></div>
+        <div class="grid_12" >
+            <span><?php
+                    $c = $this->session->flashdata('settanggalcareer');
 
-        <div class="grid_12">
-            <p class="text1 col1"><a href="<?php base_url()?>isihalamancareer ">EDIT HALAMAN CAREER</a></p>
+                    echo $c;
+                    ?></span>
+            <p class="col3"><div>
+
+                <br><?php
+                    $c = $this->session->flashdata('setcontent');
+
+                    echo $c;
+                    ?><br><br>
+
+            </div></p>
+
+        </div>
+        <a href="<?php echo base_url(); ?>Admin/isihalamancareer" class="btn">EDIT CAREER</a>
+        
+
+        </div>
+       
             
-           
-                <?php
-                    $table = $this->session->flashdata('setcareer');
-
-                    echo $table;
-                    ?>
-         </div>
+        
     </div>
-</div>

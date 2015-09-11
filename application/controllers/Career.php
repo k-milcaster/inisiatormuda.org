@@ -16,12 +16,37 @@ class Career extends CI_Controller {
                     $header = array(
                         'title' => 'Career',
                     );
-                    $this->load->view('header', $header);
-                    $this->load->view('career');
-                    $this->load->view('footer');
+                    $header = array(
+                'title' => 'Career',
+            );
+            
+            $this->load->model('careerModel');
+            $querycategory = $this->careerModel->getCareer();
+            $setcareer = '';
+            $setidcareer = 0;
+            $setcontentcareer = '';
+            $settanggal='';
+            
+            foreach ($querycategory->result_array() as $row) {
+                $setcareer = $row['title'];
+                $setidcareer = $row['id_career'];
+                $setcontentcareer = $row ['content'];
+                $settanggal = $row['datetime'];
+            }
+            $this->session->set_flashdata('setcareer', $setcareer);
+            $this->session->set_flashdata('setcontent', $setcontentcareer);
+            $this->session->set_flashdata('settanggalcareer', $settanggal);
+            
+
+           $this->load->view('header', $header);
+           $this->load->view('career');
+           $this->load->view('footer');
+                    
                 }
             }
         }
     }
+    
+
 
 }
