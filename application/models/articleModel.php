@@ -14,6 +14,9 @@ public function getArticleList() {
         $query = $this->db->query("SELECT * FROM category");
         return $query;
     }
+    
+    
+    
     public function getcategorybyid($param){
         $query = $this->db->query("SELECT * FROM category WHERE id_category = ".$param);
         return $query;
@@ -45,6 +48,30 @@ public function getArticleList() {
         
         
     }
+    
+    public function getarticleid($param) {
+        $query = $this->db->query("SELECT * FROM article WHERE title = '".$param."'" );
+        return $query;
+    }
+    
+        public function insertimage($param1, $param2) {
+        $new_article = array(
+       'id_img' => null,
+       'id_article' => $param1,
+       'img' => $param2,
+       
+       
+         
+      );
+
+     $this->db->insert('images',$new_article);
+    
+        
+        
+    }
+    
+    
+    
     
     public function editarticle($param,$param1,$param2,$param3) {
 //        UPDATE `article` SET `id_article`=[value-1],`id_category`=[value-2],`title`=[value-3],`content`=[value-4],`postdate`=[value-5],`published`=[value-6],`recommended`=[value-7],`user_id_user`=[value-8] WHERE 1

@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
         $this->load->library('image_lib');
         $config = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.jpg',
+            'source_image' => 'public/images/articles/source/1/' . $param . '.jpg',
             'new_image' => 'public/images/articles/one/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 800,
@@ -71,16 +71,16 @@ class Admin extends CI_Controller {
         );
         $configjpeg = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.jpeg',
+            'source_image' => 'public/images/articles/source/1/' . $param . '.jpeg',
             'new_image' => 'public/images/articles/one/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 800,
             'height' => 500,
         );
-        
+
         $configpng = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.png',
+            'source_image' => 'public/images/articles/source/1/' . $param . '.png',
             'new_image' => 'public/images/articles/one/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 800,
@@ -99,24 +99,24 @@ class Admin extends CI_Controller {
         $this->load->library('image_lib');
         $config = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.jpg',
+            'source_image' => 'public/images/articles/source/2/' . $param . '.jpg',
             'new_image' => 'public/images/articles/two/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 300,
             'height' => 206,
         );
- $configjpeg = array(
+        $configjpeg = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.jpeg',
+            'source_image' => 'public/images/articles/source/2/' . $param . '.jpeg',
             'new_image' => 'public/images/articles/two/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 300,
             'height' => 306,
         );
-        
+
         $configpng = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.png',
+            'source_image' => 'public/images/articles/source/2/' . $param . '.png',
             'new_image' => 'public/images/articles/two/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 300,
@@ -135,25 +135,25 @@ class Admin extends CI_Controller {
         $this->load->library('image_lib');
         $config = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.jpg',
+            'source_image' => 'public/images/articles/source/3/' . $param . '.jpg',
             'new_image' => 'public/images/articles/three/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 300,
             'height' => 206,
         );
 
-         $configjpeg = array(
+        $configjpeg = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.jpeg',
+            'source_image' => 'public/images/articles/source/3/' . $param . '.jpeg',
             'new_image' => 'public/images/articles/three/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 300,
             'height' => 206,
         );
-        
+
         $configpng = array(
             'image_library' => 'gd2',
-            'source_image' => 'public/images/articles/source/' . $param . '.png',
+            'source_image' => 'public/images/articles/source/3/' . $param . '.png',
             'new_image' => 'public/images/articles/three/' . $param . '.jpg',
             'maintain_ratio' => TRUE,
             'width' => 300,
@@ -181,38 +181,7 @@ class Admin extends CI_Controller {
             $name = explode("</h1>", $teks);
             $setid = substr($name[0], 4);
             $textid = str_replace(' ', '', $setid);
-            $in=1;
-            for ($j = 1; $j <= 3; $j++) {
-                
-                $new_name = $j.'init' . $textid; //renaming
-                $config['file_name'] = $new_name;
-                $config['upload_path'] = 'public/images/articles/source/';
-                $config['allowed_types'] = 'jpg|jpeg|png';
-                $config['max_size'] = '2000';
-               
-                $this->load->library('upload', $config);
-               
-
-
-                if (!$this->upload->do_upload('userfile' . $j)) {
-                    $header = array(
-                        'title' => 'careers',
-                    );
-                    $upload_error = array('err' => $this->upload->display_errors());
-                    $this->load->view('headeradmin', $header);
-                    $this->load->view('admaddstaffs', $upload_error);
-                    $this->load->view('footer');
-                } else {
-                    $upload_data = $this->upload->data();
-                    
-                }
-            }
-            $ambil1 = 'init' . $textid;
-            $this->do_cropone($ambil1);
-            $this->do_croptwo($ambil1);
-            $this->do_cropthree($ambil1);
-
-
+            $in = 1;
             $this->load->model('articleModel');
             $pieces = explode("</h1>", $teks);
             $title = $pieces[0];
@@ -220,7 +189,6 @@ class Admin extends CI_Controller {
             $dateTime = date('Y-m-d H:i:s');
             if ($newcategory == '') {
                 $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
-//simpan gambar
             } else {
                 $this->articleModel->insertnewcat($newcategory);
                 $paramater = $this->articleModel->getidcat($newcategory);
@@ -229,6 +197,117 @@ class Admin extends CI_Controller {
                 }
                 $this->articleModel->insertarticle($getid, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
             }
+            $this->load->library('upload');
+            $new_name = 'init1' . $textid; //renaming
+            $config['file_name'] = $new_name;
+            $config['upload_path'] = 'public/images/articles/source/1/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size'] = '2000';
+            $this->upload->initialize($config); // Important
+            $this->upload->do_upload($new_name);
+
+
+            $querycategory = $this->articleModel->getarticleid($title);
+            $idnya = 0;
+            foreach ($querycategory->result_array() as $row) {
+                $id = $row['id_article'];
+            };
+            $upload_data = $this->upload->data();
+            $this->articleModel->insertimage($id, $new_name);
+
+
+
+            if (!$this->upload->do_upload('userfile' . 1)) {
+                $header = array(
+                    'title' => 'careers',
+                );
+                $upload_error = array('err' => $this->upload->display_errors());
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admaddstaffs', $upload_error);
+                $this->load->view('footer');
+            }
+
+
+
+
+            $new_names = 'init2' . $textid; //renaming
+            $configs['file_name'] = $new_names;
+            $configs['upload_path'] = 'public/images/articles/source/2/';
+            $configs['allowed_types'] = 'jpg|jpeg|png';
+            $configs['max_size'] = '2000';
+            $this->upload->initialize($configs); // Important
+            $this->upload->do_upload($new_names);
+            //$this->load->library('upload', $config);
+            $upload_data = $this->upload->data();
+            $this->articleModel->insertimage($id, $new_names);
+
+
+
+            if (!$this->upload->do_upload('userfile' . 2)) {
+                $header = array(
+                    'title' => 'careers',
+                );
+                $upload_error = array('err' => $this->upload->display_errors());
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admaddstaffs', $upload_error);
+                $this->load->view('footer');
+            }
+
+
+//            }
+
+
+            $new_namess = 'init3' . $textid; //renaming
+            $configss['file_name'] = $new_namess;
+            $configss['upload_path'] = 'public/images/articles/source/3/';
+            $configss['allowed_types'] = 'jpg|jpeg|png';
+            $configss['max_size'] = '2000';
+            $this->upload->initialize($configss); // Important
+            $this->upload->do_upload($new_namess);
+            //$this->load->library('upload', $config);
+            $upload_data = $this->upload->data();
+            $this->articleModel->insertimage($id, $new_namess);
+
+
+
+            if (!$this->upload->do_upload('userfile' . 3)) {
+                $header = array(
+                    'title' => 'careers',
+                );
+                $upload_error = array('err' => $this->upload->display_errors());
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admaddstaffs', $upload_error);
+                $this->load->view('footer');
+            }
+
+            $this->do_cropone($new_name);
+            $this->do_croptwo($new_names);
+            $this->do_cropthree($new_namess);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             redirect(base_url() . "admin/direktoriarticle");
         }
     }
