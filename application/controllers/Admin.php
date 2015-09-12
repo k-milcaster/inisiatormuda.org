@@ -321,6 +321,44 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function partners() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->model('partnersmodel');
+            $init = $this->partnersmodel->getPartnersList();
+            $content = array(
+                'init' => $init,
+            );
+            $header = array(
+                'title' => 'staffs',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admstaffs', $content);
+            $this->load->view('footer');
+        }
+    }
+
+    public function addPartner(){
+        
+    }
+    
+    public function doAddPartner(){
+        
+    }
+    
+    public function updatePartner(){
+        
+    }
+    
+    public function doUpdatePartner(){
+        
+    }
+    
+    public function doDeletePartner(){
+        
+    }
+
     public function staffs() {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
