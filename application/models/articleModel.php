@@ -15,7 +15,10 @@ public function getArticleList() {
         return $query;
     }
     
-    
+    public function ambilgambar($param) {
+        $query = $this->db->query("SELECT * FROM images where id_article ='".$param."'");
+        return $query;
+    }
     
     public function getcategorybyid($param){
         $query = $this->db->query("SELECT * FROM category WHERE id_category = ".$param);

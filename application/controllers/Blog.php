@@ -137,7 +137,7 @@ class Blog extends CI_Controller {
 //            }
 //        }
 //    }
-    public function isiartikel($param) {
+    public function isiartikel($param,$param2,$param3,$param4) {
         $header = array(
             'title' => 'Blog',
         );
@@ -155,8 +155,9 @@ class Blog extends CI_Controller {
         $this->session->set_flashdata('contentpengunjung', $setcontent);
         $this->session->set_flashdata('titlepengunjung', $settitle);
         $this->session->set_flashdata('datepengunjung', $setdate);
-
-
+        $this->session->set_flashdata('param2', $param2);
+        $this->session->set_flashdata('param3', $param3);
+        $this->session->set_flashdata('param4', $param4);
         $this->load->view('header', $header);
         $this->load->view('artikelpengunjung');
         $this->load->view('footer');
