@@ -93,7 +93,7 @@ class Admin extends CI_Controller {
         $this->image_lib->initialize($configpng);
         $this->image_lib->resize();
     }
-    
+
     public function do_croponesmall($param) {
 
         $this->load->library('image_lib');
@@ -112,7 +112,7 @@ class Admin extends CI_Controller {
             'maintain_ratio' => TRUE,
             'width' => 300,
             'height' => 206,
-            );
+        );
 
         $configpng = array(
             'image_library' => 'gd2',
@@ -129,7 +129,6 @@ class Admin extends CI_Controller {
         $this->image_lib->initialize($configpng);
         $this->image_lib->resize();
     }
-    
 
     public function do_croptwo($param) {
 
@@ -339,38 +338,168 @@ class Admin extends CI_Controller {
         if (!$this->auth()) {
             redirect(base_url() . "admin");
         } else {
-            $this->load->model('partnersmodel');
-            $init = $this->partnersmodel->getPartnersList();
+            $this->load->model('partnermodel');
+            $partners = $this->partnermodel->getPartnersList();
             $content = array(
-                'init' => $init,
+                'partners' => $partners,
             );
             $header = array(
-                'title' => 'staffs',
+                'title' => 'partners',
             );
             $this->load->view('headeradmin', $header);
-            $this->load->view('admstaffs', $content);
+            $this->load->view('admpartners', $content);
             $this->load->view('footer');
         }
     }
 
-    public function addPartner(){
-        
+    public function addPartner() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $header = array(
+                'title' => 'partners',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admaddpartner');
+            $this->load->view('footer');
+        }
     }
-    
-    public function doAddPartner(){
-        
+
+    public function doAddPartner() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('name', 'Progname', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('desc', 'Progloc', 'trim|required|min_length[4]|max_length[600]');
+
+            if ($this->form_validation->run() == FALSE) {
+                $header = array(
+                    'title' => 'partners',
+                );
+                $content = array(
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                );
+
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admaddpartner', $content);
+                $this->load->view('footer');
+            } else {
+                $dateposted = date('YmdHis');
+                $id = $dateposted;
+                $name = $this->input->post('name');
+                $desc = $this->input->post('desc');
+
+                $new_name = 'partner' . $id; //renaming
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = 'public/images/partners/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size'] = '2000';
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $header = array(
+                        'title' => 'admaddpartner',
+                    );
+                    $upload_error = array('err' => $this->upload->display_errors());
+                    $this->load->view('headeradmin', $header);
+                    $this->load->view('admaddpartner', $upload_error);
+                    $this->load->view('footer');
+                } else {
+                    $upload_data = $this->upload->data();
+                    $this->load->model('partnermodel');
+                    $this->partnermodel->addpartner($name, $desc, $upload_data['file_name']);
+                    redirect(base_url() . "admin/partners");
+                }
+            }
+        }
     }
-    
-    public function updatePartner(){
-        
+
+    public function updatePartner() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $id = $this->uri->segment(3);
+            $this->load->model('partnermodel');
+            $partner = $this->partnermodel->getPartner($id);
+            $content = array(
+                'partner' => $partner,
+            );
+            $header = array(
+                'title' => 'partner',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admupdpartner', $content);
+            $this->load->view('footer');
+        }
     }
-    
-    public function doUpdatePartner(){
-        
+
+    public function doUpdatePartner() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('name', 'Progname', 'trim|required|min_length[2]|max_length[45]');
+            $this->form_validation->set_rules('desc', 'Progloc', 'trim|required|min_length[4]|max_length[600]');
+
+            if ($this->form_validation->run() == FALSE) {
+                $id = $this->input->post('id');
+                $this->load->model('partnermodel');
+                $partners = $this->partnermodel->getPartner($id);
+                $header = array(
+                    'title' => 'partners',
+                );
+                $content = array(
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.',
+                    'partner' => $partners,
+                );
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admupdpartner', $content);
+                $this->load->view('footer');
+            } else {
+
+                $id = $this->input->post('id');
+                $name = $this->input->post('name');
+                $desc = $this->input->post('desc');
+                $oriimg = $this->input->post('img');
+
+                $new_name = 'partner' . $id;
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = 'public/images/partners/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['overwrite'] = 'TRUE';
+                $config['max_size'] = '2000';
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('userfile')) {
+                    $this->load->model('partnermodel');
+                    $this->partnermodel->updatePartner($id, $name, $desc, $oriimg);
+                    redirect(base_url() . "admin/partners");
+                } else {
+                    $upload_data = $this->upload->data();
+                    $this->load->model('partnermodel');
+                    $this->partnermodel->updatePartner($id, $name, $desc, $upload_data['file_name']);
+                    redirect(base_url() . "admin/partners");
+                }
+            }
+        }
     }
-    
-    public function doDeletePartner(){
-        
+
+    public function deletePartner() {
+        if (!$this->auth()) {
+            redirect(base_url() . "admin");
+        } else {
+            $id = $this->uri->segment(3);
+            $this->load->model('partnermodel');
+            $this->partnermodel->deletePartner($id);
+            redirect(base_url() . "admin/partners");
+        }
     }
 
     public function staffs() {
@@ -487,13 +616,16 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('bio', 'Progloc', 'trim|required|min_length[4]|max_length[600]');
 
             if ($this->form_validation->run() == FALSE) {
+                $id = $this->input->post('id');
+                $this->load->model('staffsmodel');
+                $init = $this->staffsmodel->getStaff($id);
                 $header = array(
                     'title' => 'staffs',
                 );
                 $content = array(
-                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.',
+                    'init' => $init,
                 );
-
                 $this->load->view('headeradmin', $header);
                 $this->load->view('admupdstaffs', $content);
                 $this->load->view('footer');
@@ -997,13 +1129,16 @@ class Admin extends CI_Controller {
             $this->form_validation->set_rules('progdesc', 'Progdesc', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
+                $id = $this->input->post('progid');
+                $this->load->model('programsmodel');
+                $prog = $this->programsmodel->getProgram($id);
                 $header = array(
                     'title' => 'programs',
                 );
                 $content = array(
-                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.'
+                    'err' => 'Terdapat error pada inputan anda, mohon cek kembali.',
+                    'prog' => $prog,
                 );
-
                 $this->load->view('headeradmin', $header);
                 $this->load->view('admupdprogram', $content);
                 $this->load->view('footer');

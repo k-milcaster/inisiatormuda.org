@@ -1,13 +1,13 @@
 <div class="content"><div class="ic"></div>
     <div class="container_12">
         <div class="grid_12">
-
+            <h3><span>Our Programs</span></h3>
         </div>
         <section>
             <?php
             if ($pagecount == 1) {
                 
-            } else if ($pagecount <= 5 && $pagecount > 1) {
+            } else if ($pagecount > 1) {
                 echo '<nav role="navigation"> '
                 . '<ul class="cd-pagination no-space">'
                 . '<li class="button"><a href="' . base_url() . 'program/page/' . ($page - 1) . '">Prev</a></li>';
@@ -24,13 +24,16 @@
             }
             ?>
         </section>
+        <br>        
         <div class="clear"></div>
         <div class="port">
             <?php
             $count = 0;
             $flag = 1;
+            $total = 0;
             foreach ($programs->result() as $row) {
                 $count++;
+                $total++;
                 if ($flag == $page) {
                     echo '<div class="grid_4">
                         <a href="' . base_url() . 'program/id/' . $row->id_programs . '" class="gal">'
@@ -48,6 +51,9 @@
                     $flag++;
                     $count = 0;
                 }
+            }
+            if ($total == 0) {
+                echo '<h2>Konten belum tersedia</h2>';
             }
             ?>
             <div class="clear"></div>

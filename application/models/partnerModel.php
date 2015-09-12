@@ -6,9 +6,8 @@ class Partnermodel extends CI_Model {
         parent::__construct();
     }
 
-    public function addPartner($id, $name, $desc, $img) {
+    public function addPartner($name, $desc, $img) {
         $data = array(
-            'id_partner' => $id,
             'name' => $name,
             'desc' => $desc,
             'img' => $img,
@@ -16,7 +15,7 @@ class Partnermodel extends CI_Model {
         $this->db->insert('partner', $data);
     }
 
-    public function getPartnerList() {
+    public function getPartnersList() {
         $query = $query = $this->db->get('partner');
         return $query;
     }
@@ -38,7 +37,7 @@ class Partnermodel extends CI_Model {
             'desc' => $desc,
             'img' => $img,
         );
-        $this->db->where('id', $id);
+        $this->db->where('id_partner', $id);
         $this->db->update('partner', $data);
     }
 

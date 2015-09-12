@@ -62,12 +62,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <nav  class="" >
                             <ul class="sf-menu">
-                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/direktoriarticle">Articles</a></li>
-                                <li <?php if ($title == "staffs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/staffs">Staffs</a></li>
-                                <li <?php if ($title == "programs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/programs">Programs</a></li>
-                                <li <?php if ($title == "careers") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/careers">Careers</a></li>                                
+                                <li <?php if ($title == "articles") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/direktoriarticle">Article</a></li>
+                                <li <?php if ($title == "staffs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/staffs">Staff</a></li>
+                                <li <?php if ($title == "programs") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/programs">Program</a></li>
+                                <li <?php if ($title == "partners") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/partners">Partner</a></li>
+                                <li <?php if ($title == "careers") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/careers">Career</a></li>                                
                                 <li <?php if ($title == "users") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/users">User</a></li>                                
-                                <li <?php if ($title == "system") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/system">Maintenance</a></li>
+                                <li <?php if ($title == "system") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/system">System</a></li>
                                 <li <?php if ($title == "logout") echo 'class="current"'; ?>><a href="<?php echo base_url(); ?>admin/doLogout">Log Out</a></li>                                                                
                             </ul>
                         </nav>
