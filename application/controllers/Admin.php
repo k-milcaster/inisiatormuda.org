@@ -93,6 +93,43 @@ class Admin extends CI_Controller {
         $this->image_lib->initialize($configpng);
         $this->image_lib->resize();
     }
+    
+    public function do_croponesmall($param) {
+
+        $this->load->library('image_lib');
+        $config = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/1/' . $param . '.jpg',
+            'new_image' => 'public/images/articles/onesmall/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+        $configjpeg = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/1/' . $param . '.jpeg',
+            'new_image' => 'public/images/articles/onesmall/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+            );
+
+        $configpng = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/1/' . $param . '.png',
+            'new_image' => 'public/images/articles/onesmall/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configjpeg);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configpng);
+        $this->image_lib->resize();
+    }
+    
 
     public function do_croptwo($param) {
 
@@ -281,32 +318,9 @@ class Admin extends CI_Controller {
             }
 
             $this->do_cropone($new_name);
+            $this->do_croponesmall($new_name);
             $this->do_croptwo($new_names);
             $this->do_cropthree($new_namess);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             redirect(base_url() . "admin/direktoriarticle");
         }
