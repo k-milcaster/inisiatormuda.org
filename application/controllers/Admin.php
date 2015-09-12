@@ -58,8 +58,116 @@ class Admin extends CI_Controller {
         }
     }
 
+    public function do_cropone($param) {
+
+        $this->load->library('image_lib');
+        $config = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.jpg',
+            'new_image' => 'public/images/articles/one/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 800,
+            'height' => 500,
+        );
+        $configjpeg = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.jpeg',
+            'new_image' => 'public/images/articles/one/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 800,
+            'height' => 500,
+        );
+        
+        $configpng = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.png',
+            'new_image' => 'public/images/articles/one/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 800,
+            'height' => 500,
+        );
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configjpeg);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configpng);
+        $this->image_lib->resize();
+    }
+
+    public function do_croptwo($param) {
+
+        $this->load->library('image_lib');
+        $config = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.jpg',
+            'new_image' => 'public/images/articles/two/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+ $configjpeg = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.jpeg',
+            'new_image' => 'public/images/articles/two/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 306,
+        );
+        
+        $configpng = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.png',
+            'new_image' => 'public/images/articles/two/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configjpeg);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configpng);
+        $this->image_lib->resize();
+    }
+
+    public function do_cropthree($param) {
+
+        $this->load->library('image_lib');
+        $config = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.jpg',
+            'new_image' => 'public/images/articles/three/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+
+         $configjpeg = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.jpeg',
+            'new_image' => 'public/images/articles/three/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+        
+        $configpng = array(
+            'image_library' => 'gd2',
+            'source_image' => 'public/images/articles/source/' . $param . '.png',
+            'new_image' => 'public/images/articles/three/' . $param . '.jpg',
+            'maintain_ratio' => TRUE,
+            'width' => 300,
+            'height' => 206,
+        );
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configjpeg);
+        $this->image_lib->resize();
+        $this->image_lib->initialize($configpng);
+        $this->image_lib->resize();
+    }
+
     public function posting() {
-        $newcategory = '';
         $teks = $this->input->post('teks');
         $category = $this->input->post('listcategory');
         $newcategory = $this->input->post('categorys');
@@ -69,26 +177,58 @@ class Admin extends CI_Controller {
             redirect(base_url() . "Admin/articles");
         } else {
             $this->load->model('articleModel');
+            $setid = '';
+            $name = explode("</h1>", $teks);
+            $setid = substr($name[0], 4);
+            $textid = str_replace(' ', '', $setid);
+            $in=1;
+            for ($j = 1; $j <= 3; $j++) {
+                
+                $new_name = $j.'init' . $textid; //renaming
+                $config['file_name'] = $new_name;
+                $config['upload_path'] = 'public/images/articles/source/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size'] = '2000';
+               
+                $this->load->library('upload', $config);
+               
 
+
+                if (!$this->upload->do_upload('userfile' . $j)) {
+                    $header = array(
+                        'title' => 'careers',
+                    );
+                    $upload_error = array('err' => $this->upload->display_errors());
+                    $this->load->view('headeradmin', $header);
+                    $this->load->view('admaddstaffs', $upload_error);
+                    $this->load->view('footer');
+                } else {
+                    $upload_data = $this->upload->data();
+                    
+                }
+            }
+            $ambil1 = 'init' . $textid;
+            $this->do_cropone($ambil1);
+            $this->do_croptwo($ambil1);
+            $this->do_cropthree($ambil1);
+
+
+            $this->load->model('articleModel');
             $pieces = explode("</h1>", $teks);
             $title = $pieces[0];
             $title = $title . '</h1>';
-
-
             $dateTime = date('Y-m-d H:i:s');
-
             if ($newcategory == '') {
                 $this->articleModel->insertarticle($category, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
+//simpan gambar
             } else {
                 $this->articleModel->insertnewcat($newcategory);
                 $paramater = $this->articleModel->getidcat($newcategory);
                 foreach ($paramater->result_array() as $row) {
                     $getid = $row['id_category'];
                 }
-
                 $this->articleModel->insertarticle($getid, $pieces[1], $this->session->userdata('id_user'), $title, $dateTime);
             }
-
             redirect(base_url() . "admin/direktoriarticle");
         }
     }
@@ -394,14 +534,14 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'careers',
             );
-            
+
             $this->load->model('careerModel');
             $querycategory = $this->careerModel->getCareer();
             $setcareer = '';
             $setidcareer = 0;
             $setcontentcareer = '';
-            $settanggal='';
-            
+            $settanggal = '';
+
             foreach ($querycategory->result_array() as $row) {
                 $setcareer = $row['title'];
                 $setidcareer = $row['id_career'];
@@ -411,7 +551,7 @@ class Admin extends CI_Controller {
             $this->session->set_flashdata('setcareer', $setcareer);
             $this->session->set_flashdata('setcontent', $setcontentcareer);
             $this->session->set_flashdata('settanggalcareer', $settanggal);
-            
+
 
             $this->load->view('headeradmin', $header);
             $this->load->view('admcareers');
@@ -878,7 +1018,7 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'careers',
             );
-            
+
             $this->load->view('headeradmin', $header);
             $this->load->view('admpagecareer');
             $this->load->view('footer');
@@ -893,9 +1033,9 @@ class Admin extends CI_Controller {
             $this->load->model('careerModel');
 
             $pieces = explode("</h1>", $teks);
-            
+
             $title = $pieces[0];
-            $title=substr($title, 4);
+            $title = substr($title, 4);
             $title = $title;
 
 
