@@ -8,50 +8,18 @@
         $flag = 1;
         $index=1;
         foreach ($article->result() as $row) {
-            $setuser = $row->user_id_user;
-            $articleid = $row->id_article;
-            $queryusername = $this->articleModel->getusername($setuser);
-               $querygambar = $this->articleModel->ambilgambar($articleid);
-            foreach ($queryusername->result_array() as $rows) {
-                $setuser = $rows['username'];
-            }
-            
-            
-                 foreach ($querygambar->result_array() as $ro) {
-                     if($index==1){
-                         $setimage1=$ro['img'];
-        
-                     }
-                     else if($index==2){
-                         $setimage2=$ro['img'];
-        
-                         
-                     }
-                     else{
-                         $setimage3=$ro['img'];
-                     }
-                     $index++;
-                 }
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
             $count++;
             if ($flag == $page) {
                 echo '<div class="grid_12">
             <h3 class="pb1"><span>' . $row->title . '</span></h3>
-            <img src="' . base_url() . 'public/images/articles/onesmall/'.$setimage1.'.jpg" alt="" class="img_inner fleft">
+            <img src="' . base_url() . 'public/images/articles/onesmall/'.$row->img.'.jpg" alt="" class="img_inner fleft">
             <div class="extra_wrapper">
-                <p>By : ' . $setuser . '<br>' . '<span>  Date : ' . substr($row->postdate, 0, 10) . '</span>' . substr($row->content, 0, 250) . '...<a href="' . base_url() . 'Blog/isiartikel/' . $row->id_article . '/'.$setimage1.'/'.$setimage2.'/'.$setimage3.'" class="btn" style="margin-left: 110px">MORE</a></p>
+                <p>By : ' . $row->username . '<br>' . '<span>  Date : ' . substr($row->postdate, 0, 10) . '</span><br>' . substr($row->content, 0, 250) . '...</p><br>
             </div>      
-            
-        </div>';
+            <div class="grid_6"></div><div class="grid_2"><a href="' . base_url() . 'Blog/isiartikel/' . $row->id_article . '/'.$row->img.'/'.$row->img2.'/'.$row->img3.'"><div class="btn-red">Read More...</div></a></div>
+        
+</div>';
             }
 
             if ($count == 4) {
@@ -62,7 +30,7 @@
         }
         ?>
 
-    </div>
+</div>';
 
 <section>
             <?php
@@ -86,5 +54,6 @@
             ?>
         </section>    
 
+</div>
 </div>
 

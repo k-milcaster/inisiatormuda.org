@@ -235,22 +235,16 @@ class Admin extends CI_Controller {
             }
             $this->load->library('upload');
             $new_name = 'init1' . $textid; //renaming
-            $config['file_name'] = $new_name;
+            $config['file_name'] = substr($new_name, 0, 13);
             $config['upload_path'] = 'public/images/articles/source/1/';
             $config['allowed_types'] = 'jpg|jpeg|png';
             $config['max_size'] = '2000';
             $this->upload->initialize($config); // Important
-            $this->upload->do_upload($new_name);
+            $this->upload->do_upload(substr($new_name, 0, 13));
 
 
-            $querycategory = $this->articleModel->getarticleid($title);
-            $idnya = 0;
-            foreach ($querycategory->result_array() as $row) {
-                $id = $row['id_article'];
-            };
+
             $upload_data = $this->upload->data();
-            $this->articleModel->insertimage($id, $new_name);
-
 
 
             if (!$this->upload->do_upload('userfile' . 1)) {
@@ -267,15 +261,15 @@ class Admin extends CI_Controller {
 
 
             $new_names = 'init2' . $textid; //renaming
-            $configs['file_name'] = $new_names;
+            $configs['file_name'] = substr($new_names, 0, 13);
+            ;
             $configs['upload_path'] = 'public/images/articles/source/2/';
             $configs['allowed_types'] = 'jpg|jpeg|png';
             $configs['max_size'] = '2000';
             $this->upload->initialize($configs); // Important
-            $this->upload->do_upload($new_names);
+            $this->upload->do_upload(substr($new_name, 0, 13));
             //$this->load->library('upload', $config);
             $upload_data = $this->upload->data();
-            $this->articleModel->insertimage($id, $new_names);
 
 
 
@@ -294,15 +288,15 @@ class Admin extends CI_Controller {
 
 
             $new_namess = 'init3' . $textid; //renaming
-            $configss['file_name'] = $new_namess;
+            $configss['file_name'] = substr($new_namess, 0, 13);
+            ;
             $configss['upload_path'] = 'public/images/articles/source/3/';
             $configss['allowed_types'] = 'jpg|jpeg|png';
             $configss['max_size'] = '2000';
             $this->upload->initialize($configss); // Important
-            $this->upload->do_upload($new_namess);
+            $this->upload->do_upload(substr($new_namess, 0, 13));
             //$this->load->library('upload', $config);
             $upload_data = $this->upload->data();
-            $this->articleModel->insertimage($id, $new_namess);
 
 
 
@@ -316,10 +310,21 @@ class Admin extends CI_Controller {
                 $this->load->view('footer');
             }
 
-            $this->do_cropone($new_name);
-            $this->do_croponesmall($new_name);
-            $this->do_croptwo($new_names);
-            $this->do_cropthree($new_namess);
+            $this->do_cropone(substr($new_name, 0, 13));
+            $this->do_croponesmall(substr($new_name, 0, 13));
+            $this->do_croptwo(substr($new_names, 0, 13));
+            $this->do_cropthree(substr($new_namess, 0, 13));
+
+
+            $querycategory = $this->articleModel->getarticleid($title);
+            $id = 0;
+            foreach ($querycategory->result_array() as $row) {
+                $id = $row['id_article'];
+            };
+            $this->articleModel->insertimage($id, substr($new_name, 0, 13), substr($new_names, 0, 13), substr($new_namess, 0, 13));
+
+
+
 
             redirect(base_url() . "admin/direktoriarticle");
         }
@@ -1094,6 +1099,7 @@ class Admin extends CI_Controller {
         $this->load->database();
         $this->load->model("articleModel");
         $query = $this->articleModel->deletearticles($param);
+        $querys = $this->articleModel->deletetrack($param);
         redirect(base_url() . 'Admin/direktoriarticle');
     }
 
@@ -1284,7 +1290,14 @@ class Admin extends CI_Controller {
             $header = array(
                 'title' => 'careers',
             );
-
+            $isi = '';
+            $this->load->model('careerModel');
+            $qua = $this->careerModel->getCareer();
+            $contentall = '';
+            foreach ($qua->result_array() as $row) {
+                $contentall = $contentall . '<h1>' . $row['title'] . '</h1>' . $row['content'];
+            }
+            $this->session->set_flashdata('contentcar', $contentall);
             $this->load->view('headeradmin', $header);
             $this->load->view('admpagecareer');
             $this->load->view('footer');
@@ -1296,23 +1309,35 @@ class Admin extends CI_Controller {
         if ($teks == '') {
             redirect(base_url() . "Admin/articles");
         } else {
-            $this->load->model('careerModel');
 
-            $pieces = explode("</h1>", $teks);
+            if (isset($_POST['reset'])) {
+                $header = array(
+                    'title' => 'careers',
+                );
+                $contentall = '';
+                $this->session->set_flashdata('contentcar', $contentall);
+                $this->load->view('headeradmin', $header);
+                $this->load->view('admpagecareer');
+                $this->load->view('footer');
+            } else {
+                $this->load->model('careerModel');
 
-            $title = $pieces[0];
-            $title = substr($title, 4);
-            $title = $title;
+                $pieces = explode("</h1>", $teks);
+
+                $title = $pieces[0];
+                $title = substr($title, 4);
+                $title = $title;
 
 
-            $dateTime = date('Y-m-d H:i:s');
+                $dateTime = date('Y-m-d H:i:s');
 
-            $this->careerModel->deletecareer();
-            $this->careerModel->insertcareer($title, $pieces[1], $dateTime, $this->session->userdata('id_user'));
+                $this->careerModel->deletecareer();
+                $this->careerModel->insertcareer($title, $pieces[1], $dateTime, $this->session->userdata('id_user'));
 
 
 
-            redirect(base_url() . "admin/careers");
+                redirect(base_url() . "admin/careers");
+            }
         }
     }
 
