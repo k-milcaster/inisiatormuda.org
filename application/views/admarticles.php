@@ -1,5 +1,11 @@
 <div class="content"><div class="ic"></div>
     <h2>Write Article</h2>
+    <br>
+    <?php
+                    if (isset($err)) {
+                        echo '<h5>' . $err . '</h5>';
+                    }
+                    ?>
     <div class="container_12">                  
         <form id="form" method="post" action="<?php echo base_url(); ?>admin/posting"enctype="multipart/form-data">
             <div class="hero-unit" style="margin-top:5%">

@@ -208,9 +208,25 @@ class Admin extends CI_Controller {
         $category = $this->input->post('listcategory');
         $newcategory = $this->input->post('categorys');
         if ($newcategory == '' && $category == 0) {
-            redirect(base_url() . "Admin/articles");
-        } else if ($teks == '') {
-            redirect(base_url() . "Admin/articles");
+            $content = array(
+                'err' => 'Harus memilih jenis kategori atau menambah kategori pada field yang disediakan'
+            );
+            $header = array(
+                'title' => 'careers',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admarticles', $content);
+            $this->load->view('footer');
+        } else if ($teks == '' || substr($teks, 0, 4) != '<h1>') {
+            $content = array(
+                'err' => 'Harus menggunakan Heading sebagai judul (awalan) atau field masih kosong'
+            );
+            $header = array(
+                'title' => 'careers',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admarticles', $content);
+            $this->load->view('footer');
         } else {
             $this->load->model('articleModel');
             $setid = '';
@@ -241,52 +257,33 @@ class Admin extends CI_Controller {
             $config['max_size'] = '2000';
             $this->upload->initialize($config); // Important
             $this->upload->do_upload(substr($new_name, 0, 13));
-
-
-
             $upload_data = $this->upload->data();
-
-
             if (!$this->upload->do_upload('userfile' . 1)) {
                 $header = array(
                     'title' => 'careers',
                 );
                 $upload_error = array('err' => $this->upload->display_errors());
                 $this->load->view('headeradmin', $header);
-                $this->load->view('admaddstaffs', $upload_error);
+                $this->load->view('admarticles', $upload_error);
                 $this->load->view('footer');
             }
-
-
-
-
             $new_names = 'init2' . $textid; //renaming
             $configs['file_name'] = substr($new_names, 0, 13);
-            ;
             $configs['upload_path'] = 'public/images/articles/source/2/';
             $configs['allowed_types'] = 'jpg|jpeg|png';
             $configs['max_size'] = '2000';
             $this->upload->initialize($configs); // Important
             $this->upload->do_upload(substr($new_name, 0, 13));
-            //$this->load->library('upload', $config);
             $upload_data = $this->upload->data();
-
-
-
             if (!$this->upload->do_upload('userfile' . 2)) {
-                $header = array(
-                    'title' => 'careers',
-                );
-                $upload_error = array('err' => $this->upload->display_errors());
-                $this->load->view('headeradmin', $header);
-                $this->load->view('admaddstaffs', $upload_error);
-                $this->load->view('footer');
+//                $header = array(
+//                    'title' => 'careers',
+//                );
+//                $upload_error = array('err' => $this->upload->display_errors());
+//                $this->load->view('headeradmin', $header);
+//                $this->load->view('admarticles', $upload_error);
+//                $this->load->view('footer');
             }
-
-
-//            }
-
-
             $new_namess = 'init3' . $textid; //renaming
             $configss['file_name'] = substr($new_namess, 0, 13);
             ;
@@ -295,19 +292,18 @@ class Admin extends CI_Controller {
             $configss['max_size'] = '2000';
             $this->upload->initialize($configss); // Important
             $this->upload->do_upload(substr($new_namess, 0, 13));
-            //$this->load->library('upload', $config);
             $upload_data = $this->upload->data();
 
 
 
             if (!$this->upload->do_upload('userfile' . 3)) {
-                $header = array(
-                    'title' => 'careers',
-                );
-                $upload_error = array('err' => $this->upload->display_errors());
-                $this->load->view('headeradmin', $header);
-                $this->load->view('admaddstaffs', $upload_error);
-                $this->load->view('footer');
+//                $header = array(
+//                    'title' => 'careers',
+//                );
+//                $upload_error = array('err' => $this->upload->display_errors());
+//                $this->load->view('headeradmin', $header);
+//                $this->load->view('admarticles', $upload_error);
+//                $this->load->view('footer');
             }
 
             $this->do_cropone(substr($new_name, 0, 13));
@@ -1024,41 +1020,34 @@ class Admin extends CI_Controller {
         $teks = $this->input->post('teks');
         $category = $this->input->post('listcategory');
         $newcategory = $this->input->post('categorys');
-        if ($teks == '' || $category == '') {
-            redirect(base_url() . "Admin/direktoriarticle");
+
+
+        if ($newcategory == '' && $category == 0) {
+            $content = array(
+                'err' => 'Harus memilih jenis kategori atau menambah kategori pada field yang disediakan'
+            );
+            $header = array(
+                'title' => 'careers',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admartedit', $content);
+            $this->load->view('footer');
+        } else if ($teks == '' || substr($teks, 0, 4) != '<h1>') {
+            $content = array(
+                'err' => 'Harus menggunakan Heading sebagai judul (awalan) atau field masih kosong'
+            );
+            $header = array(
+                'title' => 'careers',
+            );
+            $this->load->view('headeradmin', $header);
+            $this->load->view('admartedit', $content);
+            $this->load->view('footer');
         } else {
             $this->load->model('articleModel');
 
             $pieces = explode("</h1>", $teks);
             $title = $pieces[0];
             $title = $title . '</h1>';
-            if ($pieces[0] == '') {
-                $pieces = explode("</h2>", $teks);
-                $title = '';
-                $title = $pieces[0];
-                $title = $title . '</h2>';
-                if ($pieces[0] == "") {
-                    $pieces = explode("</h3>", $teks);
-                    $title = '';
-                    $title = $pieces[0] . '</h3>';
-                    if ($pieces[0] == "") {
-                        $pieces = explode("</h4>", $teks);
-                        $title = '';
-                        $title = $pieces[0] . '</h4>';
-                        if ($pieces[0] == "") {
-                            $pieces = explode("</h5>", $teks);
-                            $title = '';
-                            $title = $pieces[0] . '</h5>';
-                            if ($pieces[0] == "") {
-                                $pieces = explode("</h6>", $teks);
-                                $title = '';
-                                $title = $pieces[0] . '</h6>';
-                            }
-                        }
-                    }
-                }
-            }
-
 
             $dateTime = date('Y-m-d H:i:s');
 
@@ -1073,6 +1062,92 @@ class Admin extends CI_Controller {
 
                 $this->articleModel->editarticle($param, $getid, $title, $pieces[1]);
             }
+
+
+            $querymax = $this->articleModel->ambilgambar($param);
+            $strimg1 = '';
+            $strimg2 = '';
+            $strimg3 = '';
+            foreach ($querymax->result_array() as $row) {
+                $strimg1 = $row['img'];
+                $strimg2 = $row['img2'];
+                $strimg3 = $row['img3'];
+            }
+
+
+
+            $this->load->library('upload');
+            $new_name = 'init1' . $textid; //renaming
+            $config['file_name'] = substr($strimg1, 0, 13);
+            $config['upload_path'] = 'public/images/articles/source/1/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['overwrite'] = 'TRUE';
+            $config['max_size'] = '2000';
+            $this->upload->initialize($config); // Important
+            $this->upload->do_upload(substr($strimg1, 0, 13));
+
+
+
+            $upload_data = $this->upload->data();
+
+
+            if (!$this->upload->do_upload('userfile' . 1)) {
+                
+            } else {
+                $this->do_cropone(substr($strimg1, 0, 13));
+                $this->do_croponesmall(substr($strimg1, 0, 13));
+                
+            }
+
+
+            $new_names = 'init2' . $textid; //renaming
+            $configs['file_name'] = substr($strimg2, 0, 13);
+            $configs['upload_path'] = 'public/images/articles/source/2/';
+            $configs['allowed_types'] = 'jpg|jpeg|png';
+            $configs['overwrite'] = 'TRUE';
+            $configs['max_size'] = '2000';
+            $this->upload->initialize($configs); // Important
+            $this->upload->do_upload(substr($strimg2, 0, 13));
+            //$this->load->library('upload', $config);
+            $upload_data = $this->upload->data();
+
+
+
+            if (!$this->upload->do_upload('userfile' . 2)) {
+                
+            } else {
+                    $this->do_croptwo(substr($strimg2, 0, 13));
+            
+            }
+
+
+            $new_namess = 'init3' . $textid; //renaming
+            $configss['file_name'] = substr($strimg3, 0, 13);
+            $configss['overwrite'] = 'TRUE';
+            $configss['upload_path'] = 'public/images/articles/source/3/';
+            $configss['allowed_types'] = 'jpg|jpeg|png';
+            $configss['max_size'] = '2000';
+            $this->upload->initialize($configss); // Important
+            $this->upload->do_upload(substr($strimg3, 0, 13));
+            //$this->load->library('upload', $config);
+            $upload_data = $this->upload->data();
+
+
+
+            if (!$this->upload->do_upload('userfile' . 3)) {
+                
+            } else {
+                $this->do_cropthree(substr($strimg3, 0, 13));
+            }
+
+
+
+
+
+
+
+
+
 
             redirect(base_url() . "admin/direktoriarticle");
         }
@@ -1098,8 +1173,27 @@ class Admin extends CI_Controller {
     public function deletearticle($param) {
         $this->load->database();
         $this->load->model("articleModel");
+        $querymax = $this->articleModel->ambilgambar($param);
+        $strimg1 = '';
+        $strimg2 = '';
+        $strimg3 = '';
+        foreach ($querymax->result_array() as $row) {
+            $strimg1 = $row['img'];
+            $strimg2 = $row['img2'];
+            $strimg3 = $row['img3'];
+        }
+
         $query = $this->articleModel->deletearticles($param);
         $querys = $this->articleModel->deletetrack($param);
+
+        // delete_files('./public/images/articles/onesmall/'.$strimg1.'jpg');
+        // delete_files('./public/images/articles/one/'.$strimg1.'jpg');
+        // delete_files('./public/images/articles/two/'.$strimg2.'jpg');
+        // delete_files('./public/images/articles/three/'.$strimg3.'jpg');
+        //  delete_file('./public/images/articles/source/1/'.$strimg1.'jpg');
+        // delete_files('./public/images/articles/source/2/'.$strimg2.'jpg');
+        // delete_files('./public/images/articles/source/3/'.$strimg3.'jpg');
+
         redirect(base_url() . 'Admin/direktoriarticle');
     }
 

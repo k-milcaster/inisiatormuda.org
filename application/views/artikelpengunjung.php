@@ -13,10 +13,10 @@
         <div class="clear"></div>
         <div class="logos">
             <div class="grid_12"><a href="#"><img src="<?php echo base_url(); ?>public/images/articles/onesmall/<?php
-                $z = $this->session->flashdata('param2');
+                    $z = $this->session->flashdata('param2');
 
-                echo $z;
-                ?>.jpg" alt=""></a></div>
+                    echo $z;
+                    ?>.jpg" alt=""></a></div>
         </div>
         <div class="grid_12" >
             <span><?php
@@ -36,21 +36,83 @@
             </div></p>
 
         </div>
-        <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/articles/two/<?php
-                $y = $this->session->flashdata('param3');
 
-                echo $y;
-                ?>.jpg" alt=""></a></div>
+
+        <?php
+        $y = $this->session->flashdata('param3');
+        $w = $this->session->flashdata('param4');
+
+        if (!isset($y) && (!isset($w))) :
+            ?>
+
+            <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
+
+        <?php endif ?>
+
+        <?php
+        $y = $this->session->flashdata('param3');
+        $w = $this->session->flashdata('param4');
+
+        if (isset($y)&&isset($w)) :
+            ?>
+
+
+            <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/articles/two/<?php
+                    $y = $this->session->flashdata('param3');
+
+                    echo $y;
+                    ?>.jpg" alt=""></a></div>
             <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/articles/three/<?php
-                $w = $this->session->flashdata('param4');
+                    $w = $this->session->flashdata('param4');
 
-                echo $w;
-                ?>.jpg" alt=""></a></div>
-        <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
-        
+                    echo $w;
+                    ?>.jpg" alt=""></a></div>
 
-        </div>
-       
+            <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
+
+        <?php endif ?>
+
+<?php
+        $y = $this->session->flashdata('param3');
+        $w = $this->session->flashdata('param4');
+
+        if (!isset($y)&&isset($w)) :
+            ?>
+
+
+            <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/articles/three/<?php
+                    $w = $this->session->flashdata('param4');
+
+                    echo $w;
+                    ?>.jpg" alt=""></a></div>
+
+            <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
+
+        <?php endif ?>
+<?php
+        $y = $this->session->flashdata('param3');
+        $w = $this->session->flashdata('param4');
+
+        if (isset($y)&&!isset($w)) :
+            ?>
+
+
+            <div class="grid_6"><a href="#"><img src="<?php echo base_url(); ?>public/images/articles/two/<?php
+                    $y = $this->session->flashdata('param3');
+
+                    echo $y;
+                    ?>.jpg" alt=""></a></div>
             
-        
+            <a href="<?php echo base_url(); ?>Blog" class="btn">BACK</a>
+
+        <?php endif ?>
+
+
+
+
+
     </div>
+
+
+
+</div>
