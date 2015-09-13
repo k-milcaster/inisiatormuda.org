@@ -486,10 +486,10 @@
         "font-styles": true,
         "color": false,
         "emphasis": true,
-        "lists": true,
+        "lists": false,
         "html": false,
-        "link": true,
-        "image": true,
+        "link": false,
+        "image": false,
         "size": 'sm',
         events: {},
         parserRules: {
