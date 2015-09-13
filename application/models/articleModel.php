@@ -142,8 +142,7 @@ ORDER BY a.postdate DESC ");
     }
 
     public function home() {
-
-        $query = $this->db->query("  SELECT a.title,i.img FROM article as a , images as i WHERE a.id_article = i.id_article AND a.recommended=1");
+        $query = $this->db->query("SELECT a.title, a.id_article, i.img , i.img2, i.img3 FROM article as a , images as i WHERE a.id_article = i.id_article AND a.recommended=1 ");
         return $query;
     }
 
