@@ -1,20 +1,14 @@
 <div class="slider_wrapper">
     <div id="camera_wrap" class="">
-       
-        <div data-src="<?php echo base_url(); ?>public/images/slider/slide1.jpg">
-            <div class="caption">
-                <div class="slide-text-info">
-                    <h1>RECENTLY POST</h1>    
-                </div>
-            </div>
-        </div>
-        <div data-src="<?php echo base_url(); ?>public/images/slider/slide2.jpg">
-            <div class="caption">
-                <div class="slide-text-info">
-                    <h1>Judicial Review UU Perkawinan</h1>    
-                </div>
-            </div>
-        </div>
+       <?php
+                $a = $this->session->flashdata('home');
+
+                echo $a;
+                ?>
+
+        
+        
+        
     </div>
 </div>
 <!--==============================Content=================================-->

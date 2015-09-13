@@ -9,14 +9,22 @@
                 <br>
                 
                 
-                <textarea name = "teks"class="textarea form-control"  placeholder="Enter text ..." style="width: 950px; height: 200px" ></textarea>
+                <textarea name = "teks"class="textarea form-control " id="comment"  placeholder="Enter text ..." style="width: 950px; height: 200px" ><?php
+             
+                $b = $this->session->flashdata('contentcar');
+
+                    echo $b;
+                    ?></textarea>
             </div>
              <div class="grid_6">
             
         </div>
             
    
-            <button name="save" class="btn btn-large btn-danger">SAVE ARTICLE</button>       
+            <button name="save" class="btn btn-large btn-danger">SAVE CAREER</button>
+            <!--<button name="reset" class="btn btn-large btn-danger">RESET ALL</button>-->
+            <button name="reset" class="btn btn-large btn-danger">RESET</button>
+            
             <script>
                 $('.textarea').wysihtml5();
             </script>
